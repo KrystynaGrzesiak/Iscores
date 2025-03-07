@@ -44,41 +44,33 @@
 #' @return a vector made of the scores for each imputation method.
 #' @export
 Iscores <- function(imputations,
-                   methods,
-                   X.NA,
-                   m=length(imputations[[1]]),
-                   num.proj=100,
-                   num.trees.per.proj = 5,
-                   min.node.size=10,
-                   n.cores = 1,
-                   projection.function = NULL,
-                   rescale =TRUE
-                   ){
+                    methods,
+                    X.NA,
+                    m=length(imputations[[1]]),
+                    num.proj=100,
+                    num.trees.per.proj = 5,
+                    min.node.size=10,
+                    n.cores = 1,
+                    projection.function = NULL,
+                    rescale =TRUE){
 
-  Iscores.values <- doevaluation(imputations=imputations,
-                                  methods=methods,
-                                  X.NA=X.NA,
-                                  m=m,
-                                  num.proj=num.proj,
-                                  num.trees.per.proj = num.trees.per.proj,
-                                  min.node.size=min.node.size,
-                                  n.cores = n.cores,
-                                  projection.function = projection.function)
-
-
-
-  Iscores.values<- do.call(rbind, Iscores.values)
-
-  if(rescale==TRUE){
+  Iscores.values <- doevaluation(imputations = imputations,
+                                 methods = methods,
+                                 X.NA = X.NA, m = m,
+                                 num.proj = num.proj,
+                                 num.trees.per.proj = num.trees.per.proj,
+                                 min.node.size = min.node.size,
+                                 n.cores = n.cores,
+                                 projection.function = projection.function)
+  Iscores.values <- do.call(rbind, Iscores.values)
+  if (rescale == TRUE) {
     names.methods <- colnames(Iscores.values)
-    Iscores.values <-lapply(Iscores.values, FUN=function(l){
-      l-max(unlist(Iscores.values))
+    Iscores.values <- lapply(Iscores.values, FUN = function(l) {
+      l - max(unlist(Iscores.values))
     })
-
-    Iscores.values <- do.call(cbind,Iscores.values)
+    Iscores.values <- do.call(cbind, Iscores.values)
     colnames(Iscores.values) <- names.methods
   }
-
   return(Iscores.values)
 
 }
