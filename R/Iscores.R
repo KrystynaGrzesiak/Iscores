@@ -65,9 +65,9 @@ Iscores <- function(imputations,
   Iscores.values <- do.call(rbind, Iscores.values)
   if (rescale == TRUE) {
     names.methods <- colnames(Iscores.values)
-    Iscores.values <- lapply(Iscores.values, FUN = function(l) {
-      l - max(unlist(Iscores.values))
-    })
+    # Iscores.values <- lapply(Iscores.values, FUN = function(l) {
+    #   l - max(unlist(Iscores.values))
+    # })
     Iscores.values <- do.call(cbind, Iscores.values)
     colnames(Iscores.values) <- names.methods
   }
