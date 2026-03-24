@@ -132,7 +132,7 @@ do_one_hot <- function(vec) {
 #' @importFrom scoringRules crps_sample
 #' @importFrom pbapply pblapply
 #' @importFrom stats model.matrix
-#' @inheritParams energy_Iscore
+#' @inheritParams energy_Iscore_num
 #'
 #' @return a numerical value denoting weighted Imputation Score obtained for
 #' provided imputation function and a table with scores and weights calculated
@@ -165,7 +165,8 @@ energy_Iscore_cat <- function(X,
                               multiple = TRUE,
                               N = 50,
                               max_length = NULL,
-                              skip_if_needed = TRUE){
+                              skip_if_needed = TRUE,
+                              n_cores = 1){
 
   N <- ifelse(multiple, N, 1)
 
@@ -189,7 +190,7 @@ energy_Iscore_cat <- function(X,
   cols_to_iterate <- intersect(order(missings_per_col, decreasing = TRUE),
                                which(dim_with_NA))[1:max_length]
 
-  scores_dat <- pbapply::pblapply(cols_to_iterate, function(j) {
+  scores_dat <- pbmcapply::pbmclapply(cols_to_iterate, function(j) {
 
     weight <- (missings_per_col[j] / n) * ((n - missings_per_col[j]) / n)
 
@@ -308,7 +309,7 @@ energy_Iscore_cat <- function(X,
                score = score_j,
                n_columns_used = sum(Oj))
 
-  }) |>
+  }, mc.cores = n_cores) |>
     do.call(rbind, args = _)
 
   weighted_score <- sum(scores_dat[["score"]] * scores_dat[["weight"]] /

@@ -4,12 +4,18 @@
 \alias{compare_Iscores}
 \title{Calculates IScores for multiple imputation functions}
 \usage{
-compare_Iscores(X, imputation_list, ...)
+compare_Iscores(X, methods_list, score = c("energy_IScore", "DR_IScore"), ...)
 }
 \arguments{
 \item{X}{data containing missing values denoted with NA's.}
 
-\item{imputation_list}{a named list of imputing functions.}
+\item{methods_list}{a named list of imputing functions.}
+
+\item{score}{a vector of names of scores to calculate. It can be
+\code{"energy_IScore"} and \code{"DR_IScore"}.}
+
+\item{...}{other arguments to be passed to  \link[Iscores]{energy_IScore} or
+\link[Iscores]{DR_IScore}}
 }
 \value{
 a vector of IScores for provided methods
@@ -19,9 +25,9 @@ Calculates IScores for multiple imputation functions
 }
 \examples{
 set.seed(111)
-X <- Iscores:::random_mcar_data(100, 4, 0.4)
-imputation_list <- list(exp = Iscores:::exp_imputation,
+X <- Iscores:::random_mcar_data(100, 3, 0.2)
+methods_list <- list(exp = Iscores:::exp_imputation,
                        norm = Iscores:::norm_imputation)
-compare_Iscores(X, imputation_list)
+compare_Iscores(X, methods_list = methods_list)
 
 }

@@ -6,7 +6,9 @@
 #' @importFrom stats sd
 #'
 #' @param X data containing missing values denoted with NA's.
-#' @param X_imp imputed dataset.
+#' @param X_imp imputed dataset of the same size as \code{X}. It's \code{NULL}
+#' by default meaning that it will be obtained by imputation of  \code{X} using
+#' the \code{imputation_func}.
 #' @param imputation_func a function that imputes data.
 #' @param N a numeric value. Number of samples from imputation distribution H.
 #' Default to 50.
@@ -21,6 +23,7 @@
 #' skipped to obtain complete columns for scoring. If FALSE, NA will be returned
 #' for column with no observed variable for training.
 #' @param scale a logical value. If TRUE, each variable is scaled in the score.
+#' @param n_cores a number of cores for parallelization.
 #'
 #' @return a numerical value denoting weighted Imputation Score obtained for
 #' provided imputation function and a table with scores and weights calculated
@@ -40,14 +43,15 @@
 #' @export
 #'
 
-energy_Iscore <- function(X,
-                   imputation_func,
-                   X_imp = NULL,
-                   multiple = TRUE,
-                   N = 50,
-                   max_length = NULL,
-                   skip_if_needed = TRUE,
-                   scale = FALSE){
+energy_Iscore_num <- function(X,
+                          imputation_func,
+                          X_imp = NULL,
+                          multiple = TRUE,
+                          N = 50,
+                          max_length = NULL,
+                          skip_if_needed = TRUE,
+                          scale = FALSE,
+                          n_cores = 1){
 
   N <- ifelse(multiple, N, 1)
 
@@ -70,7 +74,7 @@ energy_Iscore <- function(X,
   cols_to_iterate <- intersect(order(missings_per_col, decreasing = TRUE),
                                which(dim_with_NA))[1:max_length]
 
-  scores_dat <- pbapply::pblapply(cols_to_iterate, function(j) {
+  scores_dat <- pbmcapply::pbmclapply(cols_to_iterate, function(j) {
 
     weight <- (missings_per_col[j] / n) * ((n - missings_per_col[j]) / n)
 
@@ -86,7 +90,7 @@ energy_Iscore <- function(X,
     observed_j_for_train <- !M[, j]
 
     # Fully observed columns except j
-    Oj <- colSums(is.na(X[observed_j_for_train, ][, -j])) == 0
+    Oj <- colSums(is.na(X[observed_j_for_train, ][, -j, drop = FALSE])) == 0
 
     if(!any(Oj)) {
 
@@ -95,10 +99,10 @@ energy_Iscore <- function(X,
         Oj_candidates <- M[, -j]
         max_obs_Ojs <- colSums(!Oj_candidates[observed_j_for_train, ])
         observed_j_for_train <- !Oj_candidates[, which.max(max_obs_Ojs)] & !M[, j]
-        message(paste0("No complete variables for training column ", j,
-                       ". Skipping some observations."))
+        # message(paste0("No complete variables for training column ", j,
+        #                ". Skipping some observations."))
 
-        Oj <- colSums(is.na(X[observed_j_for_train, ][, -j])) == 0
+        Oj <- colSums(is.na(X[observed_j_for_train, ][, -j, drop = FALSE])) == 0
 
       } else {
         warning("Oj was empty. There was no complete column for training.")
@@ -111,12 +115,12 @@ energy_Iscore <- function(X,
 
     # Only take those that are fully observed H for all observed values of X_j
     X_imp_0 <- X_imp[observed_j_for_train, ]
-    X_test <- X_imp_0[, -j][, Oj]
+    X_test <- X_imp_0[, -j, drop = FALSE][, Oj]
     Y_test <- X_imp_0[, j]
 
     # Only take those that are fully observed H for all missing values of X_j
     X_imp_1 <- X_imp[!observed_j_for_train, ]
-    X_train <- X_imp_1[, -j][, Oj]
+    X_train <- X_imp_1[, -j, drop = FALSE][, Oj]
     Y_train <- X_imp_1[, j]
 
     # Train DRF on imputed data
@@ -157,7 +161,7 @@ energy_Iscore <- function(X,
                score = score_j,
                n_columns_used = sum(Oj))
 
-  }) |>
+  }, mc.cores = n_cores) |>
     do.call(rbind, args = _)
 
   weighted_score <- sum(scores_dat[["score"]] * scores_dat[["weight"]] /

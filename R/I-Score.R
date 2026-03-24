@@ -1,7 +1,7 @@
 
 #' @title Calculates Imputation Score for imputation function
 #'
-#' @inheritParams energy_Iscore
+#' @inheritParams energy_Iscore_num
 #'
 #' @param ... other arguments for the functions \link[Iscores]{energy_Iscore}
 #' and \link[Iscores]{energy_Iscore_cat}.
@@ -28,7 +28,7 @@
 #' @examples
 #' set.seed(111)
 #' X <- Iscores:::random_mcar_data(100, 4)
-#' imputation_func <- Iscores:::random_exp_imputation
+#' imputation_func <- Iscores:::exp_imputation
 #' energy_IScore(X, imputation_func)
 #'
 #' X <-  Iscores:::random_mcar_mixed_data(100, 4, 2)
@@ -41,8 +41,6 @@
 
 energy_IScore <- function(X, imputation_func, X_imp = NULL, ...) {
 
-  mixed <- FALSE
-
   X <- as.data.frame(X, check.names = FALSE)
 
   categoricals <- sapply(X, function(i) is.factor(i))
@@ -51,6 +49,8 @@ energy_IScore <- function(X, imputation_func, X_imp = NULL, ...) {
     message("There are some factor variables in the dataset.
     The energy-I-Score for mixed datasets will be calculated.")
     mixed <- TRUE
+  } else {
+    mixed <- FALSE
   }
 
   if(!is.function(imputation_func))
@@ -68,7 +68,7 @@ energy_IScore <- function(X, imputation_func, X_imp = NULL, ...) {
   if(mixed) {
     score <- energy_Iscore_cat(X, imputation_func, X_imp,...)
   } else {
-    score <- energy_Iscore(X, imputation_func, X_imp, ...)
+    score <- energy_Iscore_num(X, imputation_func, X_imp, ...)
   }
 
   score
@@ -77,44 +77,63 @@ energy_IScore <- function(X, imputation_func, X_imp = NULL, ...) {
 
 #' @title Calculates IScores for multiple imputation functions
 #'
-#' @inheritParams energy_Iscore
+#' @inheritParams energy_Iscore_num
 #'
-#' @param imputation_list a named list of imputing functions.
+#' @param score a vector of names of scores to calculate. It can be
+#' \code{"energy_IScore"} and \code{"DR_IScore"}.
+#' @param methods_list a named list of imputing functions.
+#' @param ... other arguments to be passed to  \link[Iscores]{energy_IScore} or
+#'  \link[Iscores]{DR_IScore}
+#'
 #'
 #' @return a vector of IScores for provided methods
 #'
 #' @examples
 #' set.seed(111)
-#' X <- Iscores:::random_mcar_data(100, 4, 0.4)
-#' imputation_list <- list(exp = Iscores:::exp_imputation,
+#' X <- Iscores:::random_mcar_data(100, 3, 0.2)
+#' methods_list <- list(exp = Iscores:::exp_imputation,
 #'                        norm = Iscores:::norm_imputation)
-#' compare_Iscores(X, imputation_list)
+#' compare_Iscores(X, methods_list = methods_list)
 #'
 #' @export
 #'
 
-compare_Iscores <- function(X, imputation_list, ...) {
+compare_Iscores <- function(X,
+                            methods_list,
+                            score = c("energy_IScore", "DR_IScore"),
+                            ...) {
 
-  if(length(names(imputation_list)) < length(imputation_list))
-    stop("You must provide a named list of imutation methods!")
+  score <- match.arg(score, c("energy_IScore", "DR_IScore"), several.ok = TRUE)
 
-  methods <- names(imputation_list)
-  iscores <- sapply(seq_along(methods), function(ith_method) {
+  lapply(score, function(ith_score) {
 
-    print(paste0("Calculating score for method: ", methods[ith_method]))
+    score_fun <- get(ith_score)
+    methods <- names(methods_list)
 
-    X_imp <- imputation_list[[ith_method]](X)
+    lapply(seq_along(methods_list), function(ith_method) {
 
-    score <- energy_IScore(X, imputation_list[[ith_method]], ...)
+      print(sprintf("Calculating %s for method: %s",
+                    ith_score,
+                    methods[ith_method]))
 
-    as.numeric(score)
-  })
+      imputation_func <- methods_list[[ith_method]]
 
-  names(iscores) <- methods
-  sort(iscores)
+      add_args <- list(...)
+
+      args <- c(list(X = X, imputation_func = imputation_func),
+                add_args[names(add_args) %in% names(formals(score_fun))])
+
+      score <- do.call(score_fun, args)
+
+      data.frame(score = as.numeric(score),
+                 score_name = ith_score,
+                 method = methods[ith_method])
+    }) |>
+      do.call(args = _, rbind)
+
+  }) |>
+    do.call(args = _, rbind)
+
+
 }
-
-
-
-
 
