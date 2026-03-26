@@ -15,7 +15,7 @@ energy_IScore(X, imputation_func, X_imp = NULL, ...)
 by default meaning that it will be obtained by imputation of  \code{X} using
 the \code{imputation_func}.}
 
-\item{...}{other arguments for the functions \link[Iscores]{energy_Iscore}
+\item{...}{other arguments for the functions \link[Iscores]{energy_Iscore_num}
 and \link[Iscores]{energy_Iscore_cat}.}
 }
 \value{
@@ -27,8 +27,8 @@ for particular columns.
 Calculates Imputation Score for imputation function
 }
 \details{
-This function relies on functions \link[Iscores]{energy_Iscore} and
-\link[Iscores]{energy_Iscore_cat}. Depending on the presence of factor-type
+This function relies on functions \link[Iscores]{energy_Iscore_num}
+and \link[Iscores]{energy_Iscore_cat}. Depending on the presence of factor-type
 data, these functions compute a score either for purely numerical data or for
 mixed data types.
 

@@ -138,7 +138,7 @@ energy_Iscore_num <- function(X,
     })
 
     if(length(imputation_list) < N) {
-      warning(spirintf("Unsuccessful imputation! Imputation function is unstable!
+      warning(sprintf("Unsuccessful imputation! Imputation function is unstable!
               Returning NA for column %i.", j))
 
       return(data.frame(column_id = j,

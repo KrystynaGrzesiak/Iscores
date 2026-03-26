@@ -23,7 +23,6 @@ RoxygenNote: 7.3.3
 Imports:
   energy,
   kernlab,
-  parallel,
   pbapply,
   pbmcapply,
   ranger,

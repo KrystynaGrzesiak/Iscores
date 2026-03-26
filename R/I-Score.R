@@ -3,11 +3,11 @@
 #'
 #' @inheritParams energy_Iscore_num
 #'
-#' @param ... other arguments for the functions \link[Iscores]{energy_Iscore}
+#' @param ... other arguments for the functions \link[Iscores]{energy_Iscore_num}
 #' and \link[Iscores]{energy_Iscore_cat}.
 #'
-#' @details This function relies on functions \link[Iscores]{energy_Iscore} and
-#' \link[Iscores]{energy_Iscore_cat}. Depending on the presence of factor-type
+#' @details This function relies on functions \link[Iscores]{energy_Iscore_num}
+#' and \link[Iscores]{energy_Iscore_cat}. Depending on the presence of factor-type
 #' data, these functions compute a score either for purely numerical data or for
 #' mixed data types.
 #'
