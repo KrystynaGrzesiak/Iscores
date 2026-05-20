@@ -351,13 +351,21 @@ parameters required for each selected score.
 
 ## Energy score
 
-If you have access to the original dataset before imputation, you can also use the energy distance as an additional evaluation metric. Our package provides an easy-to-use wrapper `edistance()` around the `energy::eqdist.e` function from the energy package. You can use it providing complete and imputed datasets:
+If you have access to the original dataset before imputation, you can also use the energy distance as an additional evaluation metric. Our package provides an easy-to-use wrapper `edistance()` around the `energy::eqdist.e` function from the energy package. 
 
 ```{r}
-# edistance(X, impute_mice_rf(X))
-# 
-# edistance(X, impute_zero(X))
+
+X_observed <- matrix(rnorm(2000), ncol = 4)  
+
+X_miss <- X_observed
+X_miss[runif(nrow(X_miss) * ncol(X_miss)) < 0.2] <- NA
+
+edistance(X_observed, impute_zero(X_miss))
+
+edistance(X_observed, impute_mice_norm(X_miss))
+
 ```
+
 
 # References
 
