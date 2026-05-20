@@ -12,7 +12,9 @@ energy_Iscore_cat(
   N = 50,
   max_length = NULL,
   skip_if_needed = TRUE,
-  n_cores = 1
+  scale = FALSE,
+  n_cores = 1,
+  silent = TRUE
 )
 }
 \arguments{
@@ -39,6 +41,8 @@ be taken under consideration.}
 \item{skip_if_needed}{logical, indicating whether some observations should be
 skipped to obtain complete columns for scoring. If FALSE, NA will be returned
 for column with no observed variable for training.}
+
+\item{scale}{a logical value. If TRUE, each variable is scaled in the score.}
 
 \item{n_cores}{a number of cores for parallelization.}
 }

@@ -4,7 +4,18 @@
 \alias{energy_IScore}
 \title{Calculates Imputation Score for imputation function}
 \usage{
-energy_IScore(X, imputation_func, X_imp = NULL, ...)
+energy_IScore(
+  X,
+  imputation_func,
+  X_imp = NULL,
+  multiple = TRUE,
+  N = 50,
+  max_length = NULL,
+  skip_if_needed = TRUE,
+  scale = FALSE,
+  n_cores = 1,
+  silent = TRUE
+)
 }
 \arguments{
 \item{X}{data containing missing values denoted with NA's.}
@@ -14,6 +25,26 @@ energy_IScore(X, imputation_func, X_imp = NULL, ...)
 \item{X_imp}{imputed dataset of the same size as \code{X}. It's \code{NULL}
 by default meaning that it will be obtained by imputation of  \code{X} using
 the \code{imputation_func}.}
+
+\item{multiple}{a logical indicating whether provided imputation method is a
+multiple imputation approach (i.e. it generates different values to impute
+for each call). Default to TRUE. Note that if multiple equals to FALSE, N is
+automatically set to 1.}
+
+\item{N}{a numeric value. Number of samples from imputation distribution H.
+Default to 50.}
+
+\item{max_length}{Maximum number of variables \eqn{X_j} to consider, can
+speed up the code. Default to \code{NULL} meaning that all the columns will
+be taken under consideration.}
+
+\item{skip_if_needed}{logical, indicating whether some observations should be
+skipped to obtain complete columns for scoring. If FALSE, NA will be returned
+for column with no observed variable for training.}
+
+\item{scale}{a logical value. If TRUE, each variable is scaled in the score.}
+
+\item{n_cores}{a number of cores for parallelization.}
 
 \item{...}{other arguments for the functions \link[Iscores]{energy_Iscore_num}
 and \link[Iscores]{energy_Iscore_cat}.}

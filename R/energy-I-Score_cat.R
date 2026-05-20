@@ -58,45 +58,42 @@ factor_to_onehot <- function(dat) {
 #' @keywords internal
 #'
 
-
-onehot_to_factor <- function(onehot_dat) {
-
-  mask <- attr(onehot_dat, "mask")
-  column_names <- attr(onehot_dat, "column_names")
-
-  factor_dat <- onehot_dat
-  factor_dat[, mask != 0] <- NULL
-
-  for(ith_var in setdiff(unique(mask), 0)) {
-
-    col_id <- which(setdiff(unique(mask), 0) == ith_var)
-
-    onehot_part <- onehot_dat[, mask == ith_var]
-
-    categories <- colnames(onehot_dat)[mask == ith_var]
-    categories <- substr(categories, start = 7, stop = nchar(categories))
-    categories <- sub("\\..*", "", categories)
-
-    cat_column <- factor(apply(onehot_part, 1, function(ith_row) {
-      category <- categories[which(as.logical(ith_row))]
-      ifelse(length(category) == 0, NA, category)
-    }), levels = as.numeric(categories))
-
-    if(ith_var > ncol(factor_dat)) {
-      factor_dat <- cbind(factor_dat, dummy_col_123_unique = cat_column)
-    } else {
-      factor_dat <- cbind(
-        factor_dat[, 1:(ith_var - 1)],
-        dummy_col_123_unique = cat_column,
-        factor_dat[, (ith_var + 1):(ncol(factor_dat) + length(unique(mask)) - 1)]
-      )
-    }
-
-    colnames(factor_dat)[ith_var] <- column_names[col_id]
-  }
-
-
-}
+# onehot_to_factor <- function(onehot_dat) {
+#
+#   mask <- attr(onehot_dat, "mask")
+#   column_names <- attr(onehot_dat, "column_names")
+#
+#   factor_dat <- onehot_dat
+#   factor_dat[, mask != 0] <- NULL
+#
+#   for(ith_var in setdiff(unique(mask), 0)) {
+#
+#     col_id <- which(setdiff(unique(mask), 0) == ith_var)
+#
+#     onehot_part <- onehot_dat[, mask == ith_var]
+#
+#     categories <- colnames(onehot_dat)[mask == ith_var]
+#     categories <- substr(categories, start = 7, stop = nchar(categories))
+#     categories <- sub("\\..*", "", categories)
+#
+#     cat_column <- factor(apply(onehot_part, 1, function(ith_row) {
+#       category <- categories[which(as.logical(ith_row))]
+#       ifelse(length(category) == 0, NA, category)
+#     }), levels = as.numeric(categories))
+#
+#     if(ith_var > ncol(factor_dat)) {
+#       factor_dat <- cbind(factor_dat, dummy_col_123_unique = cat_column)
+#     } else {
+#       factor_dat <- cbind(
+#         factor_dat[, 1:(ith_var - 1)],
+#         dummy_col_123_unique = cat_column,
+#         factor_dat[, (ith_var + 1):(ncol(factor_dat) + length(unique(mask)) - 1)]
+#       )
+#     }
+#
+#     colnames(factor_dat)[ith_var] <- column_names[col_id]
+#   }
+# }
 
 
 #' One hot encoding
@@ -166,7 +163,11 @@ energy_Iscore_cat <- function(X,
                               N = 50,
                               max_length = NULL,
                               skip_if_needed = TRUE,
-                              n_cores = 1){
+                              scale = FALSE,
+                              n_cores = 1,
+                              silent = TRUE){
+
+  warnings_vec <- c()
 
   N <- ifelse(multiple, N, 1)
 
@@ -181,7 +182,9 @@ energy_Iscore_cat <- function(X,
   if (is.null(max_length)) max_length <- sum(dim_with_NA)
 
   if (sum(dim_with_NA) < max_length){
-    warning("max_length is larger than the total number of columns with missing values!")
+    if(!silent) {
+      warning("max_length is larger than the total number of columns with missing values!")
+    }
     max_length <- sum(dim_with_NA)
   }
 
@@ -195,7 +198,9 @@ energy_Iscore_cat <- function(X,
     weight <- (missings_per_col[j] / n) * ((n - missings_per_col[j]) / n)
 
     if(missings_per_col[j] < 10) {
-      warning('Sample size of missing and nonmissing too small for nonparametric distributional regression, setting to NA')
+      if(!silent) {
+        warning('Sample size of missing and nonmissing too small for nonparametric distributional regression, setting to NA')
+      }
       return(data.frame(column_id = j,
                         weight = weight,
                         score = NA,
@@ -214,14 +219,17 @@ energy_Iscore_cat <- function(X,
         Oj_candidates <- M[, -j]
         max_obs_Ojs <- colSums(!Oj_candidates[observed_j_for_train, ])
         observed_j_for_train <- !Oj_candidates[, which.max(max_obs_Ojs)] & !M[, j]
-        message(paste0("No complete variables for training column ", j,
-                       ". Skipping some observations."))
+        if(!silent) {
+          message(paste0("No complete variables for training column ", j,
+                         ". Skipping some observations."))
+        }
 
         Oj <- colSums(is.na(X[observed_j_for_train, ][, -j])) == 0
 
       } else {
-
-        warning("Oj was empty. There was no complete column for training.")
+        if(!silent) {
+          warning("Oj was empty. There was no complete column for training.")
+        }
         return(data.frame(column_id = j,
                           weight = weight,
                           score = NA,
@@ -245,22 +253,16 @@ energy_Iscore_cat <- function(X,
     }
 
     if(j %in% factor_columns) {
+
       X_artificial <- rbind(data.frame(y = as.factor(NA), X = X_test),
                             data.frame(y = Y_train, X = X_train))
 
       Y_test <- factor_to_onehot(Y_test)
     } else {
-      X_artificial <- rbind(data.frame(y = NA_real_,
-                                       X = X_test),
+
+      X_artificial <- rbind(data.frame(y = NA_real_, X = X_test),
                             data.frame(y = as.numeric(Y_train), X = X_train))
     }
-
-    # if(onehot) {
-    #   y_encoded <- factor_to_onehot(X_artificial[, 1])
-    #   x_encoded <- factor_to_onehot(X_artificial[, -1])
-    #   mask <- c(attr(y_encoded, "mask") + 1, attr(x_encoded, "mask"))
-    #   X_artificial <- data.frame(y_encoded, x_encoded)
-    # }
 
     imputation_list <- lapply(1:N, function(ith_imputation) {
 
@@ -282,9 +284,12 @@ energy_Iscore_cat <- function(X,
 
     })
 
-    if(length(imputation_list[!sapply(imputation_list, function(x) all(is.na(x)))]) < N) {
-      warning(sprintf("Unsuccessful imputation! Imputation function is unstable!
+    if(length(imputation_list[!sapply(imputation_list,
+                                      function(x) all(is.na(x)))]) < N) {
+      if(!silent) {
+        warning(sprintf("Unsuccessful imputation! Imputation function is unstable!
               Returning NA for column %i.", j))
+      }
       return(data.frame(column_id = j, weight = weight, score = NA,
                         n_columns_used = sum(Oj))) # return score = NA
     }
@@ -301,6 +306,12 @@ energy_Iscore_cat <- function(X,
 
     } else {
       Y_matrix <- do.call(cbind, imputation_list)
+
+      if(scale) {
+        Y_test <- (Y_test - mean(Y_test)) / sd(Y_test)
+        Y_matrix <- (Y_matrix - mean(Y_test)) / sd(Y_test)
+      }
+
       score_j <- mean(scoringRules::crps_sample(y = Y_test, dat = Y_matrix))
     }
 

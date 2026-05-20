@@ -8,8 +8,21 @@ do_one_hot(vec)
 }
 \arguments{
 \item{vec}{a factor vector to be encoded}
+
+\item{onehot_dat}{a data coded with \code{factor_to_onehot} function.}
 }
 \description{
 A supplementarty function for one-hot encoding
 }
+\details{
+This function converts one hot variables into factor variables
+}
+\keyword{A}
+\keyword{One}
+\keyword{encoding}
+\keyword{for}
+\keyword{function}
+\keyword{hot}
 \keyword{internal}
+\keyword{one-hot}
+\keyword{supplementarty}

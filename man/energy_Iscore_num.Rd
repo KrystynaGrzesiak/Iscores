@@ -13,7 +13,8 @@ energy_Iscore_num(
   max_length = NULL,
   skip_if_needed = TRUE,
   scale = FALSE,
-  n_cores = 1
+  n_cores = 1,
+  silent = TRUE
 )
 }
 \arguments{

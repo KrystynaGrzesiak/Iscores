@@ -39,7 +39,16 @@
 #'
 
 
-energy_IScore <- function(X, imputation_func, X_imp = NULL, ...) {
+energy_IScore <- function(X,
+                          imputation_func,
+                          X_imp = NULL,
+                          multiple = TRUE,
+                          N = 50,
+                          max_length = NULL,
+                          skip_if_needed = TRUE,
+                          scale = FALSE,
+                          n_cores = 1,
+                          silent = TRUE) {
 
   X <- as.data.frame(X, check.names = FALSE)
 
@@ -66,14 +75,17 @@ energy_IScore <- function(X, imputation_func, X_imp = NULL, ...) {
   X_imp <- as.data.frame(X_imp, check.names = FALSE)
 
   if(mixed) {
-    score <- energy_Iscore_cat(X, imputation_func, X_imp,...)
+    score <- energy_Iscore_cat(X, imputation_func, X_imp, multiple, N,
+                               max_length, skip_if_needed, scale, n_cores,
+                               silent)
   } else {
-    score <- energy_Iscore_num(X, imputation_func, X_imp, ...)
+    score <- energy_Iscore_num(X, imputation_func, X_imp, multiple, N,
+                               max_length, skip_if_needed, scale, n_cores,
+                               silent)
   }
 
   score
 }
-
 
 #' @title Calculates IScores for multiple imputation functions
 #'

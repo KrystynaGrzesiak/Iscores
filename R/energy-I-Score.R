@@ -24,6 +24,8 @@
 #' for column with no observed variable for training.
 #' @param scale a logical value. If TRUE, each variable is scaled in the score.
 #' @param n_cores a number of cores for parallelization.
+#' @param silent logical indicating whether warnings and messages should be
+#' printed.
 #'
 #' @return a numerical value denoting weighted Imputation Score obtained for
 #' provided imputation function and a table with scores and weights calculated
@@ -44,14 +46,15 @@
 #'
 
 energy_Iscore_num <- function(X,
-                          imputation_func,
-                          X_imp = NULL,
-                          multiple = TRUE,
-                          N = 50,
-                          max_length = NULL,
-                          skip_if_needed = TRUE,
-                          scale = FALSE,
-                          n_cores = 1){
+                              imputation_func,
+                              X_imp = NULL,
+                              multiple = TRUE,
+                              N = 50,
+                              max_length = NULL,
+                              skip_if_needed = TRUE,
+                              scale = FALSE,
+                              n_cores = 1,
+                              silent = TRUE){
 
   N <- ifelse(multiple, N, 1)
 
@@ -66,8 +69,12 @@ energy_Iscore_num <- function(X,
     max_length <- sum(dim_with_NA)
 
   if (sum(dim_with_NA) < max_length){
-    warning(sprintf("max_length is larger than the total number of columns with missing values (%i)!
+
+    if(!silent) {
+      warning(sprintf("max_length is larger than the total number of columns with missing values (%i)!
                     Setting max_length to %i", sum(dim_with_NA), sum(dim_with_NA)))
+    }
+
     max_length <- sum(dim_with_NA)
   }
 
@@ -79,8 +86,10 @@ energy_Iscore_num <- function(X,
     weight <- (missings_per_col[j] / n) * ((n - missings_per_col[j]) / n)
 
     if(missings_per_col[j] < 10) {
-      warning('Sample size of missing and nonmissing too small for nonparametric distributional regression, setting to NA')
-      # return score = NA
+      if(!silent) {
+        warning('Sample size of missing and nonmissing too small for nonparametric distributional regression, setting to NA')
+      }
+
       return(data.frame(column_id = j,
                         weight = weight,
                         score = NA,
@@ -95,17 +104,23 @@ energy_Iscore_num <- function(X,
     if(!any(Oj)) {
 
       if(skip_if_needed) {
+        if(!silent) {
+          message(paste0("No complete variables for training column ", j,
+                         ". Skipping some observations."))
+        }
 
         Oj_candidates <- M[, -j]
         max_obs_Ojs <- colSums(!Oj_candidates[observed_j_for_train, ])
         observed_j_for_train <- !Oj_candidates[, which.max(max_obs_Ojs)] & !M[, j]
-        # message(paste0("No complete variables for training column ", j,
-        #                ". Skipping some observations."))
 
         Oj <- colSums(is.na(X[observed_j_for_train, ][, -j, drop = FALSE])) == 0
 
       } else {
-        warning("Oj was empty. There was no complete column for training.")
+
+        if(!silent) {
+          warning("Oj was empty. There was no complete column for training.")
+        }
+
         return(data.frame(column_id = j,
                           weight = weight,
                           score = NA,
@@ -132,14 +147,16 @@ energy_Iscore_num <- function(X,
       imputed <- try({imputation_func(X_artificial)})
 
       if(inherits(imputed, "try-error") | any(is.na(imputed)))
-        return(NA)
+        return(NULL)
 
       imputed[1:length(Y_test), 1]
     })
 
-    if(length(imputation_list) < N) {
-      warning(sprintf("Unsuccessful imputation! Imputation function is unstable!
+    if(sum(!sapply(imputation_list, is.null)) < N) {
+      if(!silent) {
+        warning(sprintf("Unsuccessful imputation! Imputation function is unstable!
               Returning NA for column %i.", j))
+      }
 
       return(data.frame(column_id = j,
                         weight = weight,

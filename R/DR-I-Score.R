@@ -5,6 +5,7 @@
 #'
 #' @return A forest object containing trees from both input forests.
 #' @export
+
 combine2Forests <- function(mod1, mod2) {
   res <- mod1
 
@@ -49,6 +50,7 @@ combine2Forests <- function(mod1, mod2) {
 #'
 #' @return A single forest object obtained by combining all forests in \code{list.rf}.
 #' @export
+
 combineForests <- function(list.rf) {
   Reduce(combine2Forests, list.rf)
 }
@@ -85,6 +87,7 @@ combineForests <- function(list.rf) {
 #' distributions.
 #'
 #' @export
+
 densityRatioScore <- function(X,
                               X_imp,
                               pattern = NULL,
@@ -96,7 +99,7 @@ densityRatioScore <- function(X,
   M <- is.na(as.matrix(X))
 
   if (!is.null(pattern)) {
-    ids_x_na <- which(pattern)
+    ids_x_na <- which(as.logical(pattern))
   } else {
     ids_x_na <- 0
   }
@@ -127,7 +130,7 @@ densityRatioScore <- function(X,
       Y_proj <- X_imp[ids_with_missing, vars, drop = FALSE][drawA, , drop = FALSE]
     } else {
       Y_proj <- X_imp[ids_with_missing, vars, drop = FALSE]
-      drawA <- c()
+      drawA <- integer(0)
     }
 
     cl_bl_output <- class.balancing(
@@ -202,6 +205,7 @@ densityRatioScore <- function(X,
 #'
 #' @return a numeric value, the DR I-Score.
 #' @export
+
 compute_drScore <- function(object, Z = Z, n_trees_per_proj, n_proj) {
 
   preds_all_f_h <- predict(
@@ -271,6 +275,7 @@ compute_drScore <- function(object, Z = Z, n_trees_per_proj, n_proj) {
 #' @param p a numeric value between 0 and 1 to be truncated
 #'
 #' @return a numeric value, the truncated probability.
+
 truncProb <- function(p) {
   pmin(pmax(p, 10^-9), 1 - 10^-9)
 }
@@ -331,6 +336,7 @@ class.balancing <- function(X_proj_complete,
 #'
 #' @return a vector of variables corresponding to the projection.
 #' @export
+
 sample_vars_proj <- function(ids_x_na,
                              X,
                              projection_function = NULL,
@@ -393,6 +399,7 @@ sample_vars_proj <- function(ids_x_na,
 #'   \item{groups}{Updated list of observation indices grouped by pattern.}
 #' }
 #' @export
+
 merge_singleton_patterns <- function(patterns, groups, ind_singletons) {
   obs_to_merge <- unlist(groups[ind_singletons])
 
@@ -516,6 +523,7 @@ get_pattern_data <- function(X) {
 #' DR_IScore(X, imputation_func)
 #'
 #' @export
+
 DR_IScore <- function(X,
                       imputation_func = NULL,
                       X_imp = NULL,
