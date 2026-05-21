@@ -8,7 +8,7 @@ energy-I-Score for imputation of mixed data (categorical and numerical)
 energy_Iscore_cat(
   X,
   imputation_func,
-  X_imp = NULL,
+  X_imp = imputation_func(X),
   multiple = TRUE,
   N = 50,
   max_length = NULL,
@@ -97,4 +97,14 @@ methods? arXiv preprint arXiv:2507.11297
 
 ``` r
 set.seed(123)
+
+X <- Iscores:::random_mcar_mixed_data(n = 100, p = 3, n_fac = 1, ratio = 0.2)
+
+imp_fun <- Iscores:::median_mode_imputation
+
+sc <- Iscores::energy_Iscore_cat(X = X, imputation_func = imp_fun, N = 5)
+#> Error: 'energy_Iscore_cat' is not an exported object from 'namespace:Iscores'
+
+sc
+#> Error: object 'sc' not found
 ```

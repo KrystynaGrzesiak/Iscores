@@ -45,7 +45,7 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">energy_Iscore_cat</span><span class="op">(</span></span>
 <span>  <span class="va">X</span>,</span>
 <span>  <span class="va">imputation_func</span>,</span>
-<span>  X_imp <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  X_imp <span class="op">=</span> <span class="fu">imputation_func</span><span class="op">(</span><span class="va">X</span><span class="op">)</span>,</span>
 <span>  multiple <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  N <span class="op">=</span> <span class="fl">50</span>,</span>
 <span>  max_length <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -136,6 +136,16 @@ methods? arXiv preprint arXiv:2507.11297
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">:::</span><span class="fu"><a href="random_mcar_mixed_data.html">random_mcar_mixed_data</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, p <span class="op">=</span> <span class="fl">3</span>, n_fac <span class="op">=</span> <span class="fl">1</span>, ratio <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">imp_fun</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">:::</span><span class="va"><a href="median_mode_imputation.html">median_mode_imputation</a></span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">::</span><span class="fu">energy_Iscore_cat</span><span class="op">(</span>X <span class="op">=</span> <span class="va">X</span>, imputation_func <span class="op">=</span> <span class="va">imp_fun</span>, N <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> 'energy_Iscore_cat' is not an exported object from 'namespace:Iscores'</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">sc</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'sc' not found</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

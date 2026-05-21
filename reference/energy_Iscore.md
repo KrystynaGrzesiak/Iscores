@@ -114,8 +114,8 @@ energy_IScore(X, imputation_func)
 X <-  Iscores:::random_mcar_mixed_data(100, 4, 2)
 imputation_func <- Iscores:::median_mode_imputation
 energy_IScore(X, imputation_func)
-#> There are some factor variables in the dataset.
-#>     The energy-I-Score for mixed datasets will be calculated.
+#> Factor variables detected.
+#>              Calculating the energy-I-Score for mixed data.
 #> [1] 0.8282569
 #> attr(,"dat")
 #>      column_id weight     score n_columns_used

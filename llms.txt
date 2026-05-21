@@ -201,11 +201,6 @@ Näf, Jeffrey, Meta-Lina Spohn, Loris Michel, and Nicolai Meinshausen.
   : Energy distance
 - [`energy_IScore()`](https://krystynagrzesiak.github.io/Iscores/reference/energy_Iscore.md)
   : Calculates Imputation Score for imputation function
-- [`energy_Iscore_cat()`](https://krystynagrzesiak.github.io/Iscores/reference/energy_Iscore_cat.md)
-  : energy-I-Score for imputation of mixed data (categorical and
-  numerical)
-- [`energy_Iscore_num()`](https://krystynagrzesiak.github.io/Iscores/reference/energy_Iscore_num.md)
-  : Calculates score for one imputation function
 
 # Articles
 

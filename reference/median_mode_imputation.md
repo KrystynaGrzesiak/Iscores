@@ -1,4 +1,4 @@
-# Standard normal imputation
+# Median/mode imputation
 
 This is an example function that imputes from N(0, 1)
 
