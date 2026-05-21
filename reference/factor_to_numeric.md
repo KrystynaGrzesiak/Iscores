@@ -1,6 +1,6 @@
 # Internal function for changing factors to numerical
 
-A supplementarty function for data management
+A supplementary function for data management
 
 ## Usage
 

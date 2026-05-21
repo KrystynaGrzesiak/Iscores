@@ -327,8 +327,8 @@ Now we place the methods in a named list:
 ``` r
 
 methods_list <- list(zero = impute_zero,
-                     mean = impute_mice_norm,
-                     median = impute_mice_rf)
+                     mice_norm = impute_mice_norm,
+                     mice_rf = impute_mice_rf)
 ```
 
 We can now compare the methods using the energy-I-Score:
@@ -341,14 +341,14 @@ sc_comparison <- compare_Iscores(X = X,
                                  N = 10,
                                  silent = TRUE)
 #> [1] "Calculating energy_IScore for method: zero"
-#> [1] "Calculating energy_IScore for method: mean"
-#> [1] "Calculating energy_IScore for method: median"
+#> [1] "Calculating energy_IScore for method: mice_norm"
+#> [1] "Calculating energy_IScore for method: mice_rf"
 
 sc_comparison
-#>       score    score_name method
-#> 1 0.7997120 energy_IScore   zero
-#> 2 0.6247271 energy_IScore   mean
-#> 3 0.6839281 energy_IScore median
+#>       score    score_name    method
+#> 1 0.7997120 energy_IScore      zero
+#> 2 0.6247271 energy_IScore mice_norm
+#> 3 0.6839281 energy_IScore   mice_rf
 ```
 
 The resulting data frame contains one row per imputation method.
@@ -369,20 +369,20 @@ comparison_all <- compare_Iscores(X = X,
                                   n_trees_per_proj = 2,
                                   silent = TRUE)
 #> [1] "Calculating energy_IScore for method: zero"
-#> [1] "Calculating energy_IScore for method: mean"
-#> [1] "Calculating energy_IScore for method: median"
+#> [1] "Calculating energy_IScore for method: mice_norm"
+#> [1] "Calculating energy_IScore for method: mice_rf"
 #> [1] "Calculating DR_IScore for method: zero"
-#> [1] "Calculating DR_IScore for method: mean"
-#> [1] "Calculating DR_IScore for method: median"
+#> [1] "Calculating DR_IScore for method: mice_norm"
+#> [1] "Calculating DR_IScore for method: mice_rf"
 
 comparison_all
-#>        score    score_name method
-#> 1  0.7997120 energy_IScore   zero
-#> 2  0.6473443 energy_IScore   mean
-#> 3  0.6753519 energy_IScore median
-#> 4 -9.2208219     DR_IScore   zero
-#> 5  1.4280980     DR_IScore   mean
-#> 6  2.4883888     DR_IScore median
+#>        score    score_name    method
+#> 1  0.7997120 energy_IScore      zero
+#> 2  0.6473443 energy_IScore mice_norm
+#> 3  0.6753519 energy_IScore   mice_rf
+#> 4 -9.2208219     DR_IScore      zero
+#> 5  1.4280980     DR_IScore mice_norm
+#> 6  2.4883888     DR_IScore   mice_rf
 ```
 
 When multiple scores are requested, additional arguments passed to
