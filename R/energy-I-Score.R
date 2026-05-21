@@ -32,8 +32,15 @@
 #' for particular columns.
 #'
 #' @examples
-#' set.seed(111)
-#' X <- matrix(rnorm(1000), nrow = 100)
+#' set.seed(123)
+#'
+#' X <- Iscores:::random_mcar_data(n = 100, p = 4, ratio = 0.2)
+#'
+#' imp_fun <- Iscores:::norm_imputation
+#'
+#' sc <- Iscores::energy_Iscore_num(X = X, imputation_func = imp_fun, N = 5)
+#'
+#' sc
 #'
 #' @references
 #' This method is described in detail in:
@@ -42,12 +49,12 @@
 #' methods? arXiv preprint arXiv:2507.11297
 #' (\url{https://doi.org/10.48550/arXiv.2507.11297}).
 #'
-#' @export
+#' @keywords internal
 #'
 
 energy_Iscore_num <- function(X,
                               imputation_func,
-                              X_imp = NULL,
+                              X_imp = imputation_func(X),
                               multiple = TRUE,
                               N = 50,
                               max_length = NULL,

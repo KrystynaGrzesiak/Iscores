@@ -7,7 +7,7 @@
 energy_Iscore_num(
   X,
   imputation_func,
-  X_imp = NULL,
+  X_imp = imputation_func(X),
   multiple = TRUE,
   N = 50,
   max_length = NULL,
@@ -58,8 +58,15 @@ for particular columns.
 Calculates score for one imputation function
 }
 \examples{
-set.seed(111)
-X <- matrix(rnorm(1000), nrow = 100)
+set.seed(123)
+
+X <- Iscores:::random_mcar_data(n = 100, p = 4, ratio = 0.2)
+
+imp_fun <- Iscores:::norm_imputation
+
+sc <- Iscores::energy_Iscore_num(X = X, imputation_func = imp_fun, N = 5)
+
+sc
 
 }
 \references{
@@ -69,3 +76,4 @@ Näf, J., Grzesiak, K., and Scornet, E. (2025a). How to rank imputation
 methods? arXiv preprint arXiv:2507.11297
 (\url{https://doi.org/10.48550/arXiv.2507.11297}).
 }
+\keyword{internal}

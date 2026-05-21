@@ -2,7 +2,7 @@
 % Please edit documentation in R/random_na_data.R
 \name{median_mode_imputation}
 \alias{median_mode_imputation}
-\title{Standard normal imputation}
+\title{Median/mode imputation}
 \usage{
 median_mode_imputation(X_miss)
 }
