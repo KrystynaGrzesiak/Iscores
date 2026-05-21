@@ -3,7 +3,7 @@ title: "Energy-I-Score: First Steps"
 output: rmarkdown::html_vignette
 bibliography: references.bib
 vignette: >
-  %\VignetteIndexEntry{Example_IScore}
+  %\VignetteIndexEntry{Energy-I-Score: First Steps}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

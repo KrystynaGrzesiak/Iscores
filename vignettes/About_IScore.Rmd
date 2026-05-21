@@ -2,7 +2,7 @@
 title: "Energy-I-Score: Implementation Details"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{About_IScore}
+  %\VignetteIndexEntry{Energy-I-Score: Implementation Details}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
