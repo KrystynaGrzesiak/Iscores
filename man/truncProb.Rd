@@ -15,3 +15,4 @@ a numeric value, the truncated probability.
 \description{
 Truncation of probability
 }
+\keyword{internal}

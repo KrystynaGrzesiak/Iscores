@@ -51,3 +51,4 @@ The method builds multiple random forests on projected versions of
 the data to estimate the density ratio between observed and imputed
 distributions.
 }
+\keyword{internal}

@@ -4,7 +4,7 @@
 #' @param mod2 A fitted forest object.
 #'
 #' @return A forest object containing trees from both input forests.
-#' @export
+#' @keywords internal
 
 combine2Forests <- function(mod1, mod2) {
   res <- mod1
@@ -49,7 +49,7 @@ combine2Forests <- function(mod1, mod2) {
 #' @param list.rf A list of fitted forest objects.
 #'
 #' @return A single forest object obtained by combining all forests in \code{list.rf}.
-#' @export
+#' @keywords internal
 
 combineForests <- function(list.rf) {
   Reduce(combine2Forests, list.rf)
@@ -86,7 +86,7 @@ combineForests <- function(list.rf) {
 #' the data to estimate the density ratio between observed and imputed
 #' distributions.
 #'
-#' @export
+#' @keywords internal
 
 densityRatioScore <- function(X,
                               X_imp,
@@ -204,7 +204,7 @@ densityRatioScore <- function(X,
 #' @param n_trees_per_proj an integer, the number of trees per projection.
 #'
 #' @return a numeric value, the DR I-Score.
-#' @export
+#' @keywords internal
 
 compute_drScore <- function(object, Z = Z, n_trees_per_proj, n_proj) {
 
@@ -275,6 +275,8 @@ compute_drScore <- function(object, Z = Z, n_trees_per_proj, n_proj) {
 #' @param p a numeric value between 0 and 1 to be truncated
 #'
 #' @return a numeric value, the truncated probability.
+#'
+#' @keywords internal
 
 truncProb <- function(p) {
   pmin(pmax(p, 10^-9), 1 - 10^-9)
@@ -290,6 +292,7 @@ truncProb <- function(p) {
 #' @param vars vectors of variables in projection.
 #'
 #' @return a list of new X_proj_complete and Y.proj.
+#' @keywords internal
 
 class.balancing <- function(X_proj_complete,
                             Y.proj,
@@ -335,7 +338,7 @@ class.balancing <- function(X_proj_complete,
 #' pattern.
 #'
 #' @return a vector of variables corresponding to the projection.
-#' @export
+#' @keywords internal
 
 sample_vars_proj <- function(ids_x_na,
                              X,
@@ -398,7 +401,7 @@ sample_vars_proj <- function(ids_x_na,
 #'   \item{patterns}{Updated matrix of unique missingness patterns.}
 #'   \item{groups}{Updated list of observation indices grouped by pattern.}
 #' }
-#' @export
+#' @keywords internal
 
 merge_singleton_patterns <- function(patterns, groups, ind_singletons) {
   obs_to_merge <- unlist(groups[ind_singletons])
@@ -456,7 +459,7 @@ merge_singleton_patterns <- function(patterns, groups, ind_singletons) {
 #' If more than one pattern is represented by a single observation, these
 #' singleton patterns are merged using \code{merge_singleton_patterns()}.
 #'
-#' @export
+#' @keywords internal
 
 get_pattern_data <- function(X) {
   NA.pat <- is.na(X)

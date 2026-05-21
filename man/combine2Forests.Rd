@@ -17,3 +17,4 @@ A forest object containing trees from both input forests.
 \description{
 Combine two projection forests
 }
+\keyword{internal}

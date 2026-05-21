@@ -21,3 +21,4 @@ a numeric value, the DR I-Score.
 \description{
 Compute the density ratio score
 }
+\keyword{internal}

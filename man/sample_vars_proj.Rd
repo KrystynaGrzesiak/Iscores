@@ -24,3 +24,4 @@ a vector of variables corresponding to the projection.
 \description{
 Sampling of Projections
 }
+\keyword{internal}

@@ -15,3 +15,4 @@ A single forest object obtained by combining all forests in \code{list.rf}.
 \description{
 Combine a list of forests
 }
+\keyword{internal}

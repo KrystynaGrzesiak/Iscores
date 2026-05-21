@@ -29,3 +29,4 @@ single pattern. If the merged pattern already exists among the current
 patterns, the corresponding groups of observations are combined. Otherwise,
 a new pattern is created and appended.
 }
+\keyword{internal}

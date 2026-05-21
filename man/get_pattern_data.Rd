@@ -30,3 +30,4 @@ to define the unique patterns.
 If more than one pattern is represented by a single observation, these
 singleton patterns are merged using \code{merge_singleton_patterns()}.
 }
+\keyword{internal}
