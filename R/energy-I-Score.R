@@ -38,7 +38,7 @@
 #'
 #' imp_fun <- Iscores:::norm_imputation
 #'
-#' sc <- Iscores::energy_Iscore_num(X = X, imputation_func = imp_fun, N = 5)
+#' sc <- Iscores:::energy_Iscore_num(X = X, imputation_func = imp_fun, N = 5)
 #'
 #' sc
 #'

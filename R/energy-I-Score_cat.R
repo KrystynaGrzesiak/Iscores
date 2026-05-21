@@ -110,7 +110,7 @@ do_one_hot <- function(vec) {
 #'
 #' imp_fun <- Iscores:::median_mode_imputation
 #'
-#' sc <- Iscores::energy_Iscore_cat(X = X, imputation_func = imp_fun, N = 5)
+#' sc <- Iscores:::energy_Iscore_cat(X = X, imputation_func = imp_fun, N = 5)
 #'
 #' sc
 #'
