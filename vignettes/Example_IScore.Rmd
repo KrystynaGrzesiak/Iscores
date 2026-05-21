@@ -283,8 +283,8 @@ Now we place the methods in a named list:
 
 ```{r}
 methods_list <- list(zero = impute_zero,
-                     mean = impute_mice_norm,
-                     median = impute_mice_rf)
+                     mice_norm = impute_mice_norm,
+                     mice_rf = impute_mice_rf)
 ```
 
 We can now compare the methods using the energy-I-Score:
