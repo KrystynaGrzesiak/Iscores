@@ -52,8 +52,8 @@ energy_IScore <- function(X,
   categoricals <- sapply(X, function(i) is.factor(i))
 
   if(any(categoricals)) {
-    message("There are some factor variables in the dataset.
-    The energy-I-Score for mixed datasets will be calculated.")
+    message( "Factor variables detected.
+             Calculating the energy-I-Score for mixed data.")
     mixed <- TRUE
   } else {
     mixed <- FALSE
@@ -67,9 +67,11 @@ energy_IScore <- function(X,
 
     if(inherits(X_imp, "try-error") | any(is.na(X_imp)))
       stop("Errored imputing X using provided imputation_func!")
+
+    X_imp <- as.data.frame(X_imp, check.names = FALSE)
   }
 
-  X_imp <- as.data.frame(X_imp, check.names = FALSE)
+
 
   if(mixed) {
     score <- energy_Iscore_cat(X, imputation_func, X_imp, multiple, N,
