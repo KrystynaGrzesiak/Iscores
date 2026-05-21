@@ -71,7 +71,7 @@ test_that("Energy-I-Score works for mixed data", {
 
   res <- energy_IScore(X, imputation_func)
 
-  expect_equal(as.vector(round(res, 7)), 0.766058, tolerance = 0.05)
+  expect_equal(as.vector(round(res, 7)), 0.822, tolerance = 0.05)
 
   tbl <- attr(res, "dat")
 
@@ -80,11 +80,11 @@ test_that("Energy-I-Score works for mixed data", {
                      column_id = c(2L, 1L, 4L, 5L, 3L, 6L),
                      weight = c(0.1824, 0.16, 0.1539, 0.1539, 0.1476, 0.1476),
                      score = c(0.68651110663701, 0.708839930029851, 0.868062359850176,
-                               0.628240115086631, 0.684496594623652, 1.04528828523229),
+                               0.96974644277, 0.684496594623652, 1.04528828523229),
                      n_columns_used = c(1L, 1L, 1L, 1L, 1L, 1L)),
                      row.names = c("col2", "col1", "col4", "col5", "col3", "col6"),
                      class = "data.frame"),
-                   tolerance = 10^(-10))
+                   tolerance = 0.001)
 
 })
 

@@ -106,6 +106,14 @@ do_one_hot <- function(vec) {
 #' @examples
 #' set.seed(123)
 #'
+#' X <- Iscores:::random_mcar_mixed_data(n = 100, p = 3, n_fac = 1, ratio = 0.2)
+#'
+#' imp_fun <- Iscores:::median_mode_imputation
+#'
+#' sc <- Iscores::energy_Iscore_cat(X = X, imputation_func = imp_fun, N = 5)
+#'
+#' sc
+#'
 #' @references
 #' This method is described in detail in:
 #'
@@ -113,12 +121,12 @@ do_one_hot <- function(vec) {
 #' methods? arXiv preprint arXiv:2507.11297
 #' (\url{https://doi.org/10.48550/arXiv.2507.11297}).
 #'
-#' @export
+#' @keywords internal
 #'
 
 energy_Iscore_cat <- function(X,
                               imputation_func,
-                              X_imp = NULL,
+                              X_imp = imputation_func(X),
                               multiple = TRUE,
                               N = 50,
                               max_length = NULL,
@@ -256,6 +264,21 @@ energy_Iscore_cat <- function(X,
 
     if(j %in% factor_columns) {
       Y_test <- factor_to_onehot(Y_test)
+
+      if(!all(colnames(Y_test) %in% colnames(imputation_list[[1]]))) {
+
+        imputation_list <- lapply(imputation_list, function(ith) {
+          missing_cols <- setdiff(colnames(Y_test), colnames(ith))
+
+          zeroes <- matrix(0, nrow = nrow(ith), ncol = length(missing_cols))
+          colnames(zeroes) <- missing_cols
+
+          tmp <- cbind(ith, zeroes)
+
+          tmp[, colnames(Y_test)]
+        })
+      }
+
       Y_matrix <- do.call(cbind, imputation_list)
 
       score_j <- mean(sapply(1:nrow(Y_test), function(ith_obs) {
