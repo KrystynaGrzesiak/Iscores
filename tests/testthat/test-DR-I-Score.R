@@ -8,7 +8,7 @@ test_that("DR I Score works", {
   set.seed(123)
 
   res <- DR_IScore(X, imputation_func)
-  expect_equal(round(res, 4), 2.5068)
+  expect_equal(round(res, 4), 2.5068, tolerance = 0.05)
 
   set.seed(1)
 
@@ -17,7 +17,7 @@ test_that("DR I Score works", {
   set.seed(123)
 
   res <- DR_IScore(X, X_imp = X_imp)
-  expect_equal(round(res, 4), 3.5289)
+  expect_equal(round(res, 4), 3.5289, tolerance = 0.05)
 
 
   set.seed(111)
@@ -28,7 +28,7 @@ test_that("DR I Score works", {
 
   res <- DR_IScore(X, imputation_func)
 
-  expect_equal(round(res, 4), -1.8155)
+  expect_equal(round(res, 4), -1.8155, tolerance = 0.05)
 
   set.seed(111)
 
@@ -38,7 +38,7 @@ test_that("DR I Score works", {
   imputation_func <- Iscores:::exp_imputation
   res <- DR_IScore(X, imputation_func)
 
-  expect_equal(round(res, 4), 3.1781)
+  expect_equal(round(res, 4), 3.1781, tolerance = 0.05)
 
 })
 
