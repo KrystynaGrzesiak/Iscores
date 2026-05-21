@@ -45,6 +45,9 @@ for column with no observed variable for training.}
 \item{scale}{a logical value. If TRUE, each variable is scaled in the score.}
 
 \item{n_cores}{a number of cores for parallelization.}
+
+\item{silent}{logical indicating whether warnings and messages should be
+printed.}
 }
 \value{
 a numerical value denoting weighted Imputation Score obtained for

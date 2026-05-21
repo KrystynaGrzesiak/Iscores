@@ -2,7 +2,7 @@
 % Please edit documentation in R/energy-I-Score_cat.R
 \name{energy_Iscore_cat}
 \alias{energy_Iscore_cat}
-\title{energy-I-Score for imputation of categorical (mixed) data}
+\title{energy-I-Score for imputation of mixed data (categorical and numerical)}
 \usage{
 energy_Iscore_cat(
   X,
@@ -45,6 +45,9 @@ for column with no observed variable for training.}
 \item{scale}{a logical value. If TRUE, each variable is scaled in the score.}
 
 \item{n_cores}{a number of cores for parallelization.}
+
+\item{silent}{logical indicating whether warnings and messages should be
+printed.}
 }
 \value{
 a numerical value denoting weighted Imputation Score obtained for
@@ -52,7 +55,7 @@ provided imputation function and a table with scores and weights calculated
 for particular columns.
 }
 \description{
-energy-I-Score for imputation of categorical (mixed) data
+energy-I-Score for imputation of mixed data (categorical and numerical)
 }
 \details{
 The categorical variables should be stored as factors. If you need additional

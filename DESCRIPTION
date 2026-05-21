@@ -29,8 +29,10 @@ Imports:
   stats
 Suggests: 
     knitr,
+    mice,
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 VignetteBuilder: knitr
 URL: https://krystynagrzesiak.github.io/Iscores/
+License: GPL-3

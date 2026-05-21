@@ -2,27 +2,22 @@
 % Please edit documentation in R/energy-I-Score_cat.R
 \name{do_one_hot}
 \alias{do_one_hot}
-\title{One hot encoding}
+\title{Convert a factor vector to one-hot encoding}
 \usage{
 do_one_hot(vec)
 }
 \arguments{
-\item{vec}{a factor vector to be encoded}
-
-\item{onehot_dat}{a data coded with \code{factor_to_onehot} function.}
+\item{vec}{A factor vector to be encoded.}
+}
+\value{
+A numeric matrix with one row per element of `vec` and one column per
+factor level. Column names are prefixed with `"level_"`.
 }
 \description{
-A supplementarty function for one-hot encoding
+Converts a factor vector into a one-hot encoded matrix with one
+column per factor level.
 }
 \details{
-This function converts one hot variables into factor variables
+Missing values in `vec` are preserved as rows containing `NA` values.
 }
-\keyword{A}
-\keyword{One}
-\keyword{encoding}
-\keyword{for}
-\keyword{function}
-\keyword{hot}
 \keyword{internal}
-\keyword{one-hot}
-\keyword{supplementarty}

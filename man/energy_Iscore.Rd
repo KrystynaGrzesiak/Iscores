@@ -46,8 +46,8 @@ for column with no observed variable for training.}
 
 \item{n_cores}{a number of cores for parallelization.}
 
-\item{...}{other arguments for the functions \link[Iscores]{energy_Iscore_num}
-and \link[Iscores]{energy_Iscore_cat}.}
+\item{silent}{logical indicating whether warnings and messages should be
+printed.}
 }
 \value{
 a numerical value denoting weighted Imputation Score obtained for
