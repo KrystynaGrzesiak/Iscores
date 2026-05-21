@@ -10,7 +10,7 @@ factor_to_numeric(factor_col)
 \item{factor_col}{a factor column}
 }
 \description{
-A supplementarty function for data management
+A supplementary function for data management
 }
 \details{
 This function converts factor variables to numeric variables.
