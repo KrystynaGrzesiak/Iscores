@@ -66,7 +66,7 @@ test_that("Energy-I-Score works for mixed data", {
   imputation_func <- Iscores:::median_mode_imputation
 
   expect_message(energy_IScore(X, imputation_func, silent = FALSE),
-                 "The energy-I-Score for mixed datasets will be calculated.")
+                 "Factor variables detected.")
 
 
   res <- energy_IScore(X, imputation_func)
