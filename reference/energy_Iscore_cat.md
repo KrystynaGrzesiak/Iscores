@@ -102,9 +102,14 @@ X <- Iscores:::random_mcar_mixed_data(n = 100, p = 3, n_fac = 1, ratio = 0.2)
 
 imp_fun <- Iscores:::median_mode_imputation
 
-sc <- Iscores::energy_Iscore_cat(X = X, imputation_func = imp_fun, N = 5)
-#> Error: 'energy_Iscore_cat' is not an exported object from 'namespace:Iscores'
+sc <- Iscores:::energy_Iscore_cat(X = X, imputation_func = imp_fun, N = 5)
 
 sc
-#> Error: object 'sc' not found
+#> [1] 0.7699801
+#> attr(,"dat")
+#>      column_id weight     score n_columns_used
+#> col1         1 0.1824 0.7096268              1
+#> col2         2 0.1659 0.7301908              1
+#> col4         4 0.1600 0.9355567              1
+#> col3         3 0.1539 0.7122622              1
 ```
