@@ -121,9 +121,8 @@ compare_Iscores <- function(X,
 
     lapply(seq_along(methods_list), function(ith_method) {
 
-      print(sprintf("Calculating %s for method: %s",
-                    ith_score,
-                    methods[ith_method]))
+      message(sprintf("Calculating the %s for method %s ...", ith_score,
+                      names(methods_list)[ith_method]))
 
       imputation_func <- methods_list[[ith_method]]
 
