@@ -340,9 +340,9 @@ sc_comparison <- compare_Iscores(X = X,
                                  score = "energy_IScore",
                                  N = 10,
                                  silent = TRUE)
-#> [1] "Calculating energy_IScore for method: zero"
-#> [1] "Calculating energy_IScore for method: mice_norm"
-#> [1] "Calculating energy_IScore for method: mice_rf"
+#> Calculating the energy_IScore for method zero ...
+#> Calculating the energy_IScore for method mice_norm ...
+#> Calculating the energy_IScore for method mice_rf ...
 
 sc_comparison
 #>       score    score_name    method
@@ -368,12 +368,12 @@ comparison_all <- compare_Iscores(X = X,
                                   n_proj = 10,
                                   n_trees_per_proj = 2,
                                   silent = TRUE)
-#> [1] "Calculating energy_IScore for method: zero"
-#> [1] "Calculating energy_IScore for method: mice_norm"
-#> [1] "Calculating energy_IScore for method: mice_rf"
-#> [1] "Calculating DR_IScore for method: zero"
-#> [1] "Calculating DR_IScore for method: mice_norm"
-#> [1] "Calculating DR_IScore for method: mice_rf"
+#> Calculating the energy_IScore for method zero ...
+#> Calculating the energy_IScore for method mice_norm ...
+#> Calculating the energy_IScore for method mice_rf ...
+#> Calculating the DR_IScore for method zero ...
+#> Calculating the DR_IScore for method mice_norm ...
+#> Calculating the DR_IScore for method mice_rf ...
 
 comparison_all
 #>        score    score_name    method

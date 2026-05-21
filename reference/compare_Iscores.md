@@ -42,10 +42,10 @@ X <- Iscores:::random_mcar_data(100, 3, 0.2)
 methods_list <- list(exp = Iscores:::exp_imputation,
                        norm = Iscores:::norm_imputation)
 compare_Iscores(X, methods_list = methods_list)
-#> [1] "Calculating energy_IScore for method: exp"
-#> [1] "Calculating energy_IScore for method: norm"
-#> [1] "Calculating DR_IScore for method: exp"
-#> [1] "Calculating DR_IScore for method: norm"
+#> Calculating the energy_IScore for method exp ...
+#> Calculating the energy_IScore for method norm ...
+#> Calculating the DR_IScore for method exp ...
+#> Calculating the DR_IScore for method norm ...
 #>       score    score_name method
 #> 1 0.5982370 energy_IScore    exp
 #> 2 0.7892513 energy_IScore   norm
