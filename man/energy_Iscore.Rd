@@ -84,3 +84,9 @@ imputation_func <- Iscores:::median_mode_imputation
 energy_IScore(X, imputation_func)
 
 }
+\references{
+Näf, J., Grzesiak, K., and Scornet, E. (2025).
+How to rank imputation methods?
+arXiv preprint.
+\doi{10.48550/arXiv.2507.11297}.
+}

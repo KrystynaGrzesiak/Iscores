@@ -45,9 +45,10 @@
 #' @references
 #' This method is described in detail in:
 #'
-#' Näf, J., Grzesiak, K., and Scornet, E. (2025a). How to rank imputation
-#' methods? arXiv preprint arXiv:2507.11297
-#' (\url{https://doi.org/10.48550/arXiv.2507.11297}).
+#' Näf, J., Grzesiak, K., and Scornet, E. (2025).
+#' How to rank imputation methods?
+#' arXiv preprint.
+#' \doi{10.48550/arXiv.2507.11297}.
 #'
 #' @keywords internal
 #'

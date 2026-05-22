@@ -18,14 +18,11 @@ Authors@R: c(person(given = "Krystyna",
                     email = "jeffrey@my-sh.ch",
                     comment = c(ORCID = "0000-0003-0920-1899"),
                     role = c("aut", "ctb")))
-Description: Provides tools for evaluating and ranking missing
-    data imputation methods using proper scoring rules.
-    Implements the energy-I-Score from Näf et al. (2025)
-    <doi:10.48550/arXiv.2507.11297> and the DR-I-Score
-    introduced in Näf et al. (2022)
-    <doi:10.48550/arXiv.2106.03742>.
-    Supports deterministic, stochastic and multiple
-    imputation methods for numerical and mixed datasets.
+Description: Provides tools for evaluating and ranking missing value
+    imputation methods using proper scoring rules.
+    Implements the Energy-I-Score and the DR-I-Score for the assessment
+    of deterministic, stochastic and multiple imputation methods
+    for numerical and mixed datasets.
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Imports:
