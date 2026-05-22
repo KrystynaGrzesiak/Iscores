@@ -19,6 +19,12 @@ The package supports:
 - stochastic and multiple imputations,
 - comparison of several imputation methods.
 
+For more details about the energy-I-Score check our vignettes:
+
+- [Energy-I-Score: Implementation Details](https://krystynagrzesiak.github.io/Iscores/articles/About_IScore.html)
+- [Energy-I-Score: First Steps](https://krystynagrzesiak.github.io/Iscores/articles/Example_IScore.html)
+
+
 ---
 
 ## Installation
