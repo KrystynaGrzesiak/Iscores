@@ -51,7 +51,7 @@ Compute the imputation KL-based scoring rules
 set.seed(111)
 X <- Iscores:::random_mcar_data(100, 3, 0.2)
 imputation_func <- Iscores:::exp_imputation
-DR_IScore(X, imputation_func)
+DR_IScore(X, imputation_func, m = 2, n_proj = 10, n_trees_per_proj = 2 )
 
 
 }
