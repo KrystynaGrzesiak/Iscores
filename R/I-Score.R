@@ -116,33 +116,32 @@ compare_Iscores <- function(X,
 
   score <- match.arg(score, c("energy_IScore", "DR_IScore"), several.ok = TRUE)
 
-  lapply(score, function(ith_score) {
+  do.call(rbind,
+          lapply(score, function(ith_score) {
 
-    score_fun <- get(ith_score)
-    methods <- names(methods_list)
+            score_fun <- get(ith_score)
+            methods <- names(methods_list)
 
-    lapply(seq_along(methods_list), function(ith_method) {
+            do.call(rbind, lapply(seq_along(methods_list), function(ith_method) {
 
-      message(sprintf("Calculating the %s for method %s ...", ith_score,
-                      names(methods_list)[ith_method]))
+              message(sprintf("Calculating the %s for method %s ...", ith_score,
+                              names(methods_list)[ith_method]))
 
-      imputation_func <- methods_list[[ith_method]]
+              imputation_func <- methods_list[[ith_method]]
 
-      add_args <- list(...)
+              add_args <- list(...)
 
-      args <- c(list(X = X, imputation_func = imputation_func),
-                add_args[names(add_args) %in% names(formals(score_fun))])
+              args <- c(list(X = X, imputation_func = imputation_func),
+                        add_args[names(add_args) %in% names(formals(score_fun))])
 
-      score <- do.call(score_fun, args)
+              score <- do.call(score_fun, args)
 
-      data.frame(score = as.numeric(score),
-                 score_name = ith_score,
-                 method = methods[ith_method])
-    }) |>
-      do.call(args = _, rbind)
+              data.frame(score = as.numeric(score),
+                         score_name = ith_score,
+                         method = methods[ith_method])
+            }))
 
-  }) |>
-    do.call(args = _, rbind)
+          }))
 
 
 }
