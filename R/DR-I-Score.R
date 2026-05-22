@@ -525,7 +525,15 @@ get_pattern_data <- function(X) {
 #' imputation_func <- Iscores:::exp_imputation
 #' DR_IScore(X, imputation_func)
 #'
+#'
+#' @references
+#' This method is described in detail in:
+#'
+#' Näf, Jeffrey, Meta-Lina Spohn, Loris Michel, and Nicolai Meinshausen. 2022.
+#' “Imputation Scores.” https://arxiv.org/abs/2106.03742.
+#'
 #' @export
+#'
 
 DR_IScore <- function(X,
                       imputation_func = NULL,

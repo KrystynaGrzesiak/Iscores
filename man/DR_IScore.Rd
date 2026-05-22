@@ -53,4 +53,11 @@ X <- Iscores:::random_mcar_data(100, 3, 0.2)
 imputation_func <- Iscores:::exp_imputation
 DR_IScore(X, imputation_func)
 
+
+}
+\references{
+This method is described in detail in:
+
+Näf, Jeffrey, Meta-Lina Spohn, Loris Michel, and Nicolai Meinshausen. 2022.
+“Imputation Scores.” https://arxiv.org/abs/2106.03742.
 }
