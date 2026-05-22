@@ -96,6 +96,13 @@ If your imputation method does not support categorical variables
 represented as factors, implement a wrapper function that handles the
 appropriate data type conversions before and after imputation.
 
+## References
+
+Näf, J., Grzesiak, K., and Scornet, E. (2025). How to rank imputation
+methods? arXiv preprint.
+[doi:10.48550/arXiv.2507.11297](https://doi.org/10.48550/arXiv.2507.11297)
+.
+
 ## Examples
 
 ``` r
