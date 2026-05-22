@@ -68,6 +68,13 @@ DR_IScore(
 
 a vector made of the scores for each imputation method.
 
+## References
+
+This method is described in detail in:
+
+Näf, Jeffrey, Meta-Lina Spohn, Loris Michel, and Nicolai Meinshausen.
+2022. “Imputation Scores.” https://arxiv.org/abs/2106.03742.
+
 ## Examples
 
 ``` r
@@ -76,4 +83,5 @@ X <- Iscores:::random_mcar_data(100, 3, 0.2)
 imputation_func <- Iscores:::exp_imputation
 DR_IScore(X, imputation_func)
 #> [1] 2.985856
+
 ```
