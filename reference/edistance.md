@@ -40,5 +40,5 @@ X <- matrix(rnorm(100), nrow = 25)
 X_imp <- matrix(rnorm(100), nrow = 25)
 edistance(X, X_imp)
 #> E-statistic 
-#>    2.930461 
+#>    2.905211 
 ```

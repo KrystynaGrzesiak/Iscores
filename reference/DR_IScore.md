@@ -81,7 +81,7 @@ Näf, Jeffrey, Meta-Lina Spohn, Loris Michel, and Nicolai Meinshausen.
 set.seed(111)
 X <- Iscores:::random_mcar_data(100, 3, 0.2)
 imputation_func <- Iscores:::exp_imputation
-DR_IScore(X, imputation_func)
-#> [1] 2.985856
+DR_IScore(X, imputation_func, m = 2, n_proj = 10, n_trees_per_proj = 2 )
+#> [1] 3.897228
 
 ```

@@ -41,7 +41,8 @@ set.seed(111)
 X <- Iscores:::random_mcar_data(100, 3, 0.2)
 methods_list <- list(exp = Iscores:::exp_imputation,
                        norm = Iscores:::norm_imputation)
-compare_Iscores(X, methods_list = methods_list)
+compare_Iscores(X, methods_list = methods_list, m = 2,
+                n_proj = 10, n_trees_per_proj = 2 )
 #> Calculating the energy_IScore for method exp ...
 #> Calculating the energy_IScore for method norm ...
 #> Calculating the DR_IScore for method exp ...
@@ -49,6 +50,6 @@ compare_Iscores(X, methods_list = methods_list)
 #>       score    score_name method
 #> 1 0.5982370 energy_IScore    exp
 #> 2 0.7892513 energy_IScore   norm
-#> 3 3.1261742     DR_IScore    exp
-#> 4 3.1731275     DR_IScore   norm
+#> 3 2.5181721     DR_IScore    exp
+#> 4 2.8772068     DR_IScore   norm
 ```
