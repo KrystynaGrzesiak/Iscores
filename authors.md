@@ -15,13 +15,13 @@
 ## Citation
 
 Grzesiak K, Michel L, Spohn M, Näf J (2026). *Iscores: Proper Scoring
-Rules for Missing Value Imputation*. R package version 1.1.0,
+Rules for Missing Value Imputation*. R package version 1.2.0,
 <https://krystynagrzesiak.github.io/Iscores/>.
 
     @Manual{,
       title = {Iscores: Proper Scoring Rules for Missing Value Imputation},
       author = {Krystyna Grzesiak and Loris Michel and Meta-Lina Spohn and Jeffrey Näf},
       year = {2026},
-      note = {R package version 1.1.0},
+      note = {R package version 1.2.0},
       url = {https://krystynagrzesiak.github.io/Iscores/},
     }
