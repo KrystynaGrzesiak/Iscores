@@ -185,8 +185,9 @@ energy_Iscore_num <- function(X,
                score = score_j,
                n_columns_used = sum(Oj))
 
-  }, mc.cores = n_cores) |>
-    do.call(rbind, args = _)
+  }, mc.cores = n_cores)
+
+  scores_dat <- do.call(rbind, scores_dat)
 
   weighted_score <- sum(scores_dat[["score"]] * scores_dat[["weight"]] /
                           (sum(scores_dat[["weight"]], na.rm = TRUE)),

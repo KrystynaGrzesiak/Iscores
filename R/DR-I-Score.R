@@ -571,7 +571,7 @@ DR_IScore <- function(X,
   NA_pat_groups <- pattern_data[["groups"]]
   average_diff <- pattern_data[["average_diff"]]
 
-  pbmcapply::pbmclapply(seq_len(nrow(NA_pat_unique)), function(j) {
+  res <- pbmcapply::pbmclapply(seq_len(nrow(NA_pat_unique)), function(j) {
     is_last_and_merged <- j == nrow(NA_pat_unique) & average_diff
 
     group_j <- NA_pat_groups[[j]]
@@ -637,10 +637,11 @@ DR_IScore <- function(X,
       })
 
       scores
-    }) |>
-      unlist() |>
-      mean(na.rm = TRUE)
-  }, mc.cores = n_cores) |>
-    unlist() |>
-    mean(na.rm = TRUE)
+    })
+
+    mean(unlist(scores.all), na.rm = TRUE)
+
+  }, mc.cores = n_cores)
+
+  mean(unlist(res), na.rm = TRUE)
 }
