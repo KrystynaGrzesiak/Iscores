@@ -1,12 +1,11 @@
 # Iscores
 
 <!-- badges: start -->
-
 [![CRAN status](https://www.r-pkg.org/badges/version/Iscores)](https://CRAN.R-project.org/package=Iscores)
-[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![R-CMD-check](https://github.com/KrystynaGrzesiak/Iscores/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/KrystynaGrzesiak/Iscores/actions/workflows/R-CMD-check.yaml)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/Iscores)](https://CRAN.R-project.org/package=Iscores)
+[![pkgdown](https://img.shields.io/badge/docs-pkgdown-blue.svg)](https://krystynagrzesiak.github.io/Iscores/)
 <!-- badges: end -->
-
 
 `Iscores` provides scoring rules for evaluating and comparing imputation methods.
 
