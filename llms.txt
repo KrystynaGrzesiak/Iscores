@@ -36,7 +36,7 @@ install.packages("Iscores")
 
 install.packages("devtools")
 
-devtools::install_github("missValTeam/Iscores")
+devtools::install_github("KrystynaGrzesiak/Iscores")
 ```
 
 ------------------------------------------------------------------------
