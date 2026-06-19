@@ -22,7 +22,9 @@ Description: Provides tools for evaluating and ranking missing value
     imputation methods using proper scoring rules.
     Implements the Energy-I-Score and the DR-I-Score for the assessment
     of deterministic, stochastic and multiple imputation methods
-    for numerical and mixed datasets.
+    for numerical and mixed datasets, following Näf et al. (2022)
+    <doi:10.48550/arXiv.2106.03742> and Näf et al. (2025)
+    <doi:10.48550/arXiv.2507.11297>.
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Imports:

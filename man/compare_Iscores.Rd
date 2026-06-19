@@ -25,9 +25,9 @@ Calculates IScores for multiple imputation functions
 }
 \examples{
 set.seed(111)
-X <- Iscores:::random_mcar_data(100, 3, 0.2)
-methods_list <- list(exp = Iscores:::exp_imputation,
-                       norm = Iscores:::norm_imputation)
+X <- random_mcar_data(100, 3, 0.2)
+methods_list <- list(exp = exp_imputation,
+                       norm = norm_imputation)
 compare_Iscores(X, methods_list = methods_list, m = 2,
                 n_proj = 10, n_trees_per_proj = 2 )
 

@@ -1,18 +1,21 @@
-
-#' Create random example data for imputation
+#' Generate random data with MCAR missing values
 #'
-#' This function generates some independent normal variables with missing values
-#' according to MCAR (Missing Completely at Random) mechanism.
+#' Generates a numerical dataset consisting of independent standard normal
+#' variables and introduces missing values according to a Missing Completely
+#' at Random (MCAR) mechanism.
 #'
-#' @importFrom stats rnorm
-#' @importFrom stats runif
+#' @param n Number of observations.
+#' @param p Number of numerical variables.
+#' @param ratio Proportion of entries to replace with missing values.
 #'
-#' @param n number of samples
-#' @param p number of variables
-#' @param ratio fraction of missing values to generate
+#' @return A data frame with \code{n} rows and \code{p} numerical variables
+#' containing missing values.
 #'
-#' @keywords internal
+#' @examples
+#' X <- random_mcar_data(100, 3, ratio = 0.2)
+#' head(X)
 #'
+#' @export
 
 random_mcar_data <- function(n, p, ratio = 0.2) {
   X <- matrix(stats::rnorm(n * p), nrow = n)
@@ -22,20 +25,25 @@ random_mcar_data <- function(n, p, ratio = 0.2) {
 
 
 
-#' Create random example data for imputation
+#' Generate random mixed data with MCAR missing values
 #'
-#' This function generates some independent normal variables with missing values
-#' according to MCAR (Missing Completely at Random) mechanism.
+#' Generates a mixed dataset containing independent standard normal variables
+#' and categorical variables, then introduces missing values according to a
+#' Missing Completely at Random (MCAR) mechanism.
 #'
-#' @importFrom stats rnorm
-#' @importFrom stats runif
+#' @param n Number of observations.
+#' @param p Number of numerical variables.
+#' @param n_fac Number of categorical variables.
+#' @param ratio Proportion of entries to replace with missing values.
 #'
-#' @param n number of samples
-#' @param p number of variables
-#' @param ratio fraction of missing values to generate
+#' @return A data frame containing \code{p} numerical variables and
+#' \code{n_fac} factor variables with missing values.
 #'
-#' @keywords internal
+#' @examples
+#' X <- random_mcar_mixed_data(100, 3, n_fac = 2, ratio = 0.2)
+#' str(X)
 #'
+#' @export
 
 random_mcar_mixed_data <- function(n, p, n_fac = 1, ratio = 0.2) {
   X <- matrix(stats::rnorm(n * p), nrow = n)
@@ -65,16 +73,23 @@ random_mcar_mixed_data <- function(n, p, n_fac = 1, ratio = 0.2) {
 
 #' Standard exponential imputation
 #'
-#' This is an example function that imputes from univariate Exp(1) distribution.
+#' Imputes all missing values by independent draws from an exponential
+#' distribution with rate 1.
 #'
 #' @importFrom stats rexp
 #'
-#' @param X_miss a dataset with missing values
+#' @param X_miss A data set containing missing values.
 #'
-#' @keywords internal
+#' @return A completed data set with all missing values replaced by draws
+#' from an \code{Exp(1)} distribution.
 #'
+#' @examples
+#' X <- random_mcar_data(100, 3)
+#' X_imp <- exp_imputation(X)
+#'
+#' @export
 
-norm_imputation <- function(X_miss) {
+exp_imputation <- function(X_miss) {
   X_miss[is.na(X_miss)] <- stats::rexp(sum(is.na(X_miss)))
 
   X_miss
@@ -83,16 +98,23 @@ norm_imputation <- function(X_miss) {
 
 #' Standard normal imputation
 #'
-#' This is an example function that imputes from N(0, 1)
+#' Imputes all missing values by independent draws from a standard normal
+#' distribution.
 #'
 #' @importFrom stats rnorm
 #'
-#' @param X_miss a dataset with missing values
+#' @param X_miss A data set containing missing values.
 #'
-#' @keywords internal
+#' @return A completed data set with all missing values replaced by draws
+#' from a \eqn{N(0,1)} distribution.
 #'
+#' @examples
+#' X <- random_mcar_data(100, 3)
+#' X_imp <- norm_imputation(X)
+#'
+#' @export
 
-exp_imputation <- function(X_miss) {
+norm_imputation <- function(X_miss) {
   X_miss[is.na(X_miss)] <- stats::rnorm(sum(is.na(X_miss)))
 
   X_miss
@@ -100,14 +122,18 @@ exp_imputation <- function(X_miss) {
 
 #' Median/mode imputation
 #'
-#' This is an example function that imputes from N(0, 1)
+#' Imputes numerical variables using their median and categorical variables
+#' using their most frequent observed category.
 #'
-#' @importFrom stats median
+#' @param X_miss A data set containing missing values.
 #'
-#' @param X_miss a dataset with missing values
+#' @return A completed data set.
 #'
-#' @keywords internal
+#' @examples
+#' X <- random_mcar_mixed_data(100, 3, n_fac = 1)
+#' X_imp <- median_mode_imputation(X)
 #'
+#' @export
 
 median_mode_imputation <- function(X_miss) {
   for (col in names(X_miss)) {

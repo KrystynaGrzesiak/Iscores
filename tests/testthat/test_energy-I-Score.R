@@ -3,8 +3,8 @@
 test_that("Energy-I-Score works", {
 
   set.seed(111)
-  X <- Iscores:::random_mcar_data(100, 4)
-  imputation_func <- Iscores:::exp_imputation
+  X <- random_mcar_data(100, 4)
+  imputation_func <- norm_imputation
 
   res <- energy_IScore(X, imputation_func)
 
@@ -33,7 +33,7 @@ test_that("Energy-I-Score works", {
 test_that("Energy-I-Score throws a proper error", {
 
   set.seed(111)
-  X <- Iscores:::random_mcar_data(100, 4)
+  X <- random_mcar_data(100, 4)
 
   expect_error(energy_IScore(X, imputation_func = 5),
                "Imputation_func must be a function!")
@@ -46,13 +46,13 @@ test_that("Energy-I-Score throws a proper error", {
     if(sample(1:2, 1) == 1) {
       stop()
     } else {
-      Iscores:::exp_imputation(missdf)
+      norm_imputation(missdf)
     }
   }
 
   expect_warning(energy_IScore(X,
                                imputation_func = unstable_imp,
-                               X_imp = Iscores:::exp_imputation(X),
+                               X_imp = norm_imputation(X),
                                silent = FALSE),
                "Unsuccessful imputation! Imputation function is unstable!")
 
@@ -62,8 +62,8 @@ test_that("Energy-I-Score throws a proper error", {
 test_that("Energy-I-Score works for mixed data", {
 
   set.seed(123)
-  X <-  Iscores:::random_mcar_mixed_data(100, 4, 2)
-  imputation_func <- Iscores:::median_mode_imputation
+  X <-  random_mcar_mixed_data(100, 4, 2)
+  imputation_func <- median_mode_imputation
 
   expect_message(energy_IScore(X, imputation_func, silent = FALSE),
                  "Factor variables detected.")
@@ -95,8 +95,8 @@ test_that("Energy-I-Score works for mixed data", {
 test_that("Energy-I-Score cat throws a warning", {
 
   set.seed(123)
-  X <-  Iscores:::random_mcar_mixed_data(100, 4, 2)
-  imputation_func <- Iscores:::median_mode_imputation
+  X <-  random_mcar_mixed_data(100, 4, 2)
+  imputation_func <- median_mode_imputation
 
 
   expect_warning(res <- energy_IScore(X, imputation_func, skip_if_needed = FALSE,

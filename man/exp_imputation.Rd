@@ -2,14 +2,23 @@
 % Please edit documentation in R/random_na_data.R
 \name{exp_imputation}
 \alias{exp_imputation}
-\title{Standard normal imputation}
+\title{Standard exponential imputation}
 \usage{
 exp_imputation(X_miss)
 }
 \arguments{
-\item{X_miss}{a dataset with missing values}
+\item{X_miss}{A data set containing missing values.}
+}
+\value{
+A completed data set with all missing values replaced by draws
+from an \code{Exp(1)} distribution.
 }
 \description{
-This is an example function that imputes from N(0, 1)
+Imputes all missing values by independent draws from an exponential
+distribution with rate 1.
 }
-\keyword{internal}
+\examples{
+X <- random_mcar_data(100, 3)
+X_imp <- exp_imputation(X)
+
+}

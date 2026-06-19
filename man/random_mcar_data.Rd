@@ -2,19 +2,28 @@
 % Please edit documentation in R/random_na_data.R
 \name{random_mcar_data}
 \alias{random_mcar_data}
-\title{Create random example data for imputation}
+\title{Generate random data with MCAR missing values}
 \usage{
 random_mcar_data(n, p, ratio = 0.2)
 }
 \arguments{
-\item{n}{number of samples}
+\item{n}{Number of observations.}
 
-\item{p}{number of variables}
+\item{p}{Number of numerical variables.}
 
-\item{ratio}{fraction of missing values to generate}
+\item{ratio}{Proportion of entries to replace with missing values.}
+}
+\value{
+A data frame with \code{n} rows and \code{p} numerical variables
+containing missing values.
 }
 \description{
-This function generates some independent normal variables with missing values
-according to MCAR (Missing Completely at Random) mechanism.
+Generates a numerical dataset consisting of independent standard normal
+variables and introduces missing values according to a Missing Completely
+at Random (MCAR) mechanism.
 }
-\keyword{internal}
+\examples{
+X <- random_mcar_data(100, 3, ratio = 0.2)
+head(X)
+
+}

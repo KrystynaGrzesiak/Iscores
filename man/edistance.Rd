@@ -7,12 +7,16 @@
 edistance(X, X_imp, rescale = FALSE)
 }
 \arguments{
-\item{X}{a complete original dataset}
+\item{X}{a complete original dataset (without missing values).}
 
 \item{X_imp}{an imputed dataset}
 
 \item{rescale}{a logical, indicating whether the returned value should be
 rescaled. Default to \code{FALSE}. See "details" section for more information.}
+}
+\value{
+A numeric value giving the energy distance between the original
+dataset and the imputed dataset.
 }
 \description{
 Calculating energy distance/statistic.

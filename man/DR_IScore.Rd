@@ -42,15 +42,15 @@ for the score.}
 \item{...}{used for compatibility}
 }
 \value{
-a vector made of the scores for each imputation method.
+numeric value of the score obtained for provided imputation method.
 }
 \description{
 Compute the imputation KL-based scoring rules
 }
 \examples{
 set.seed(111)
-X <- Iscores:::random_mcar_data(100, 3, 0.2)
-imputation_func <- Iscores:::exp_imputation
+X <- random_mcar_data(100, 3, 0.2)
+imputation_func <- exp_imputation
 DR_IScore(X, imputation_func, m = 2, n_proj = 10, n_trees_per_proj = 2 )
 
 

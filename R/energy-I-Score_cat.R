@@ -102,18 +102,6 @@ do_one_hot <- function(vec) {
 #' \code{miceDRF:::onehot_to_factor} and \code{miceDRF:::factor_to_onehot}
 #' functions.
 #'
-#'
-#' @examples
-#' set.seed(123)
-#'
-#' X <- Iscores:::random_mcar_mixed_data(n = 100, p = 3, n_fac = 1, ratio = 0.2)
-#'
-#' imp_fun <- Iscores:::median_mode_imputation
-#'
-#' sc <- Iscores:::energy_Iscore_cat(X = X, imputation_func = imp_fun, N = 5)
-#'
-#' sc
-#'
 #' @references
 #' This method is described in detail in:
 #'

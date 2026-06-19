@@ -75,12 +75,12 @@ type conversions before and after imputation.
 }
 \examples{
 set.seed(111)
-X <- Iscores:::random_mcar_data(100, 4)
-imputation_func <- Iscores:::exp_imputation
+X <- random_mcar_data(100, 4)
+imputation_func <- exp_imputation
 energy_IScore(X, imputation_func)
 
-X <-  Iscores:::random_mcar_mixed_data(100, 4, 2)
-imputation_func <- Iscores:::median_mode_imputation
+X <-  random_mcar_mixed_data(100, 4, 2)
+imputation_func <- median_mode_imputation
 energy_IScore(X, imputation_func)
 
 }

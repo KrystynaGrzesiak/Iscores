@@ -1,6 +1,6 @@
 set.seed(111)
 X <- Iscores:::random_mcar_data(100, 3, 0.2)
-imputation_func <- Iscores:::exp_imputation
+imputation_func <- norm_imputation
 
 test_that("DR I Score works with imputation function", {
 
@@ -18,7 +18,7 @@ test_that("DR I Score works with precomputed imputations", {
   set.seed(1)
 
   X_imp <- lapply(1:5, function(i) {
-    Iscores:::norm_imputation(X)
+    exp_imputation(X)
   })
 
   set.seed(123)
@@ -34,9 +34,9 @@ test_that("DR I Score works on small datasets", {
 
   set.seed(111)
 
-  X_small <- Iscores:::random_mcar_data(20, 4, 0.2)
+  X_small <- random_mcar_data(20, 4, 0.2)
 
-  res <- DR_IScore(X_small, Iscores:::exp_imputation)
+  res <- DR_IScore(X_small, norm_imputation)
 
   expect_type(res, "double")
   expect_length(res, 1)
@@ -47,10 +47,10 @@ test_that("DR I Score works with low missingness", {
 
   set.seed(111)
 
-  X_low_miss <- Iscores:::random_mcar_data(20, 6, 0.1)
+  X_low_miss <-random_mcar_data(20, 6, 0.1)
   X_low_miss[2, 1] <- 0.1
 
-  res <- DR_IScore(X_low_miss, Iscores:::exp_imputation)
+  res <- DR_IScore(X_low_miss, norm_imputation)
 
   expect_type(res, "double")
   expect_length(res, 1)

@@ -31,17 +31,6 @@
 #' provided imputation function and a table with scores and weights calculated
 #' for particular columns.
 #'
-#' @examples
-#' set.seed(123)
-#'
-#' X <- Iscores:::random_mcar_data(n = 100, p = 4, ratio = 0.2)
-#'
-#' imp_fun <- Iscores:::norm_imputation
-#'
-#' sc <- Iscores:::energy_Iscore_num(X = X, imputation_func = imp_fun, N = 5)
-#'
-#' sc
-#'
 #' @references
 #' This method is described in detail in:
 #'

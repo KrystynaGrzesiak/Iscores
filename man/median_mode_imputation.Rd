@@ -7,9 +7,17 @@
 median_mode_imputation(X_miss)
 }
 \arguments{
-\item{X_miss}{a dataset with missing values}
+\item{X_miss}{A data set containing missing values.}
+}
+\value{
+A completed data set with all missing values imputed.
 }
 \description{
-This is an example function that imputes from N(0, 1)
+Imputes numerical variables using their median and categorical variables
+using their most frequent observed category.
 }
-\keyword{internal}
+\examples{
+X <- random_mcar_mixed_data(100, 3, n_fac = 1)
+X_imp <- median_mode_imputation(X)
+
+}

@@ -517,12 +517,12 @@ get_pattern_data <- function(X) {
 #' @param projection_function a function providing the user-specific projections.
 #' @param ... used for compatibility
 #'
-#' @return a vector made of the scores for each imputation method.
+#' @return  numeric value of the score obtained for provided imputation method.
 #'
 #' @examples
 #' set.seed(111)
-#' X <- Iscores:::random_mcar_data(100, 3, 0.2)
-#' imputation_func <- Iscores:::exp_imputation
+#' X <- random_mcar_data(100, 3, 0.2)
+#' imputation_func <- exp_imputation
 #' DR_IScore(X, imputation_func, m = 2, n_proj = 10, n_trees_per_proj = 2 )
 #'
 #'
