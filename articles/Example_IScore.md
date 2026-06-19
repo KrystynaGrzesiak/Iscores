@@ -42,7 +42,7 @@ The development version can be installed from GitHub:
 if (!requireNamespace("devtools", quietly = TRUE)) {
   install.packages("devtools")
 }
-devtools::install_github("missValTeam/Iscores")
+devtools::install_github("KrystynaGrzesiak/Iscores")
 ```
 
 After installation, load the package and set a random seed to ensure
@@ -69,7 +69,7 @@ MCAR missings:
 
 set.seed(10)
 
-X <- Iscores:::random_mcar_data(100, 4)
+X <- random_mcar_data(100, 4)
 
 head(X)
 #>            X1         X2         X3         X4
@@ -272,7 +272,7 @@ MCAR mechanism.
 
 set.seed(10)
 
-X_cat <- Iscores:::random_mcar_mixed_data(100, 4)
+X_cat <- random_mcar_mixed_data(100, 4)
 
 head(X_cat)
 #>          col1       col2      col3       col4 col5
@@ -290,7 +290,7 @@ most frequent category.
 
 ``` r
 
-impute_mean_mode <- Iscores:::median_mode_imputation
+impute_mean_mode <- median_mode_imputation
 ```
 
 The score can be calculated with the same public function as for

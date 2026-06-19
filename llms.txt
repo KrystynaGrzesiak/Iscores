@@ -208,6 +208,16 @@ Näf, Jeffrey, Meta-Lina Spohn, Loris Michel, and Nicolai Meinshausen.
   : Energy distance
 - [`energy_IScore()`](https://krystynagrzesiak.github.io/Iscores/reference/energy_Iscore.md)
   : Calculates Imputation Score for imputation function
+- [`exp_imputation()`](https://krystynagrzesiak.github.io/Iscores/reference/exp_imputation.md)
+  : Standard exponential imputation
+- [`median_mode_imputation()`](https://krystynagrzesiak.github.io/Iscores/reference/median_mode_imputation.md)
+  : Median/mode imputation
+- [`norm_imputation()`](https://krystynagrzesiak.github.io/Iscores/reference/norm_imputation.md)
+  : Standard normal imputation
+- [`random_mcar_data()`](https://krystynagrzesiak.github.io/Iscores/reference/random_mcar_data.md)
+  : Generate random data with MCAR missing values
+- [`random_mcar_mixed_data()`](https://krystynagrzesiak.github.io/Iscores/reference/random_mcar_mixed_data.md)
+  : Generate random mixed data with MCAR missing values
 
 # Articles
 

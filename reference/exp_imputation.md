@@ -1,6 +1,7 @@
-# Standard normal imputation
+# Standard exponential imputation
 
-This is an example function that imputes from N(0, 1)
+Imputes all missing values by independent draws from an exponential
+distribution with rate 1.
 
 ## Usage
 
@@ -12,4 +13,16 @@ exp_imputation(X_miss)
 
 - X_miss:
 
-  a dataset with missing values
+  A data set containing missing values.
+
+## Value
+
+A completed data set with all missing values replaced by draws from an
+`Exp(1)` distribution.
+
+## Examples
+
+``` r
+X <- random_mcar_data(100, 3)
+X_imp <- exp_imputation(X)
+```

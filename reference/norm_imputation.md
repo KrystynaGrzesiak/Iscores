@@ -1,6 +1,6 @@
-# Standard exponential imputation
+# Standard normal imputation
 
-This is an example function that imputes from univariate Exp(1)
+Imputes all missing values by independent draws from a standard normal
 distribution.
 
 ## Usage
@@ -13,4 +13,16 @@ norm_imputation(X_miss)
 
 - X_miss:
 
-  a dataset with missing values
+  A data set containing missing values.
+
+## Value
+
+A completed data set with all missing values replaced by draws from a
+\\N(0,1)\\ distribution.
+
+## Examples
+
+``` r
+X <- random_mcar_data(100, 3)
+X_imp <- norm_imputation(X)
+```

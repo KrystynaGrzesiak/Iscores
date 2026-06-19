@@ -105,7 +105,7 @@ Scores and comparing imputation approaches.</p>
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"missValTeam/Iscores"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"KrystynaGrzesiak/Iscores"</span><span class="op">)</span></span></code></pre></div>
 <p>After installation, load the package and set a random seed to ensure
 reproducibility:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -124,7 +124,7 @@ MCAR missings:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">:::</span><span class="fu"><a href="../reference/random_mcar_data.html">random_mcar_data</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_mcar_data.html">random_mcar_data</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
 <span><span class="co">#&gt;            X1         X2         X3         X4</span></span>
@@ -304,7 +304,7 @@ MCAR mechanism.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">X_cat</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">:::</span><span class="fu"><a href="../reference/random_mcar_mixed_data.html">random_mcar_mixed_data</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">X_cat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/random_mcar_mixed_data.html">random_mcar_mixed_data</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">4</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">X_cat</span><span class="op">)</span></span>
 <span><span class="co">#&gt;          col1       col2      col3       col4 col5</span></span>
@@ -318,7 +318,7 @@ MCAR mechanism.</p>
 are imputed with the median, while factor variables are imputed with the
 most frequent category.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">impute_mean_mode</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">:::</span><span class="va"><a href="../reference/median_mode_imputation.html">median_mode_imputation</a></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">impute_mean_mode</span> <span class="op">&lt;-</span> <span class="va">median_mode_imputation</span></span></code></pre></div>
 <p>The score can be calculated with the same public function as for
 numerical data:</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">

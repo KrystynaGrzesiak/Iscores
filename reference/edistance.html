@@ -50,7 +50,7 @@
 
 
 <dl><dt id="arg-x">X<a class="anchor" aria-label="anchor" href="#arg-x"></a></dt>
-<dd><p>a complete original dataset</p></dd>
+<dd><p>a complete original dataset (without missing values).</p></dd>
 
 
 <dt id="arg-x-imp">X_imp<a class="anchor" aria-label="anchor" href="#arg-x-imp"></a></dt>
@@ -62,6 +62,11 @@
 rescaled. Default to <code>FALSE</code>. See "details" section for more information.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A numeric value giving the energy distance between the original
+dataset and the imputed dataset.</p>
+    </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>This function uses the <a href="https://rdrr.io/pkg/energy/man/eqdist.etest.html" class="external-link">eqdist.e</a> function. According

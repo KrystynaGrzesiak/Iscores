@@ -107,29 +107,29 @@ methods? arXiv preprint.
 
 ``` r
 set.seed(111)
-X <- Iscores:::random_mcar_data(100, 4)
-imputation_func <- Iscores:::exp_imputation
+X <- random_mcar_data(100, 4)
+imputation_func <- exp_imputation
 energy_IScore(X, imputation_func)
-#> [1] 0.5785145
+#> [1] 0.8307913
 #> attr(,"dat")
 #>    column_id weight     score n_columns_used
-#> X1         1 0.1875 0.6185805              1
-#> X2         2 0.1824 0.5872214              1
-#> X4         4 0.1600 0.5669609              1
-#> X3         3 0.1476 0.5293823              1
+#> X1         1 0.1875 0.9536624              1
+#> X2         2 0.1824 0.7968742              1
+#> X4         4 0.1600 0.7883675              1
+#> X3         3 0.1476 0.7626066              1
 
-X <-  Iscores:::random_mcar_mixed_data(100, 4, 2)
-imputation_func <- Iscores:::median_mode_imputation
+X <-  random_mcar_mixed_data(100, 4, 2)
+imputation_func <- median_mode_imputation
 energy_IScore(X, imputation_func)
 #> Factor variables detected.
 #>              Calculating the energy-I-Score for mixed data.
-#> [1] 0.8282569
+#> [1] 0.8551675
 #> attr(,"dat")
 #>      column_id weight     score n_columns_used
-#> col5         5 0.1771 0.9498449              1
-#> col1         1 0.1716 0.7088947              1
-#> col2         2 0.1600 0.8030265              1
-#> col4         4 0.1600 0.7289043              1
-#> col3         3 0.1476 0.8242921              1
-#> col6         6 0.1204 0.9899495              1
+#> col3         3 0.1771 0.8678183              1
+#> col6         6 0.1716 1.0606602              1
+#> col1         1 0.1476 0.7664758              1
+#> col2         2 0.1411 0.7829227              1
+#> col5         5 0.1275 0.8599947              1
+#> col4         4 0.1131 0.7240102              1
 ```

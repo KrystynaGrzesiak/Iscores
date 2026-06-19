@@ -12,7 +12,7 @@ edistance(X, X_imp, rescale = FALSE)
 
 - X:
 
-  a complete original dataset
+  a complete original dataset (without missing values).
 
 - X_imp:
 
@@ -22,6 +22,11 @@ edistance(X, X_imp, rescale = FALSE)
 
   a logical, indicating whether the returned value should be rescaled.
   Default to `FALSE`. See "details" section for more information.
+
+## Value
+
+A numeric value giving the energy distance between the original dataset
+and the imputed dataset.
 
 ## Details
 

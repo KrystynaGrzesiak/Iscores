@@ -1,6 +1,7 @@
 # Median/mode imputation
 
-This is an example function that imputes from N(0, 1)
+Imputes numerical variables using their median and categorical variables
+using their most frequent observed category.
 
 ## Usage
 
@@ -12,4 +13,15 @@ median_mode_imputation(X_miss)
 
 - X_miss:
 
-  a dataset with missing values
+  A data set containing missing values.
+
+## Value
+
+A completed data set with all missing values imputed.
+
+## Examples
+
+``` r
+X <- random_mcar_mixed_data(100, 3, n_fac = 1)
+X_imp <- median_mode_imputation(X)
+```

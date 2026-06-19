@@ -85,24 +85,3 @@ Näf, J., Grzesiak, K., and Scornet, E. (2025). How to rank imputation
 methods? arXiv preprint.
 [doi:10.48550/arXiv.2507.11297](https://doi.org/10.48550/arXiv.2507.11297)
 .
-
-## Examples
-
-``` r
-set.seed(123)
-
-X <- Iscores:::random_mcar_data(n = 100, p = 4, ratio = 0.2)
-
-imp_fun <- Iscores:::norm_imputation
-
-sc <- Iscores:::energy_Iscore_num(X = X, imputation_func = imp_fun, N = 5)
-
-sc
-#> [1] 0.8951307
-#> attr(,"dat")
-#>    column_id weight     score n_columns_used
-#> X1         1 0.1824 0.7767088              1
-#> X2         2 0.1659 0.9537124              1
-#> X3         3 0.1539 0.8848685              1
-#> X4         4 0.1476 0.9863285              1
-```

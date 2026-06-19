@@ -135,27 +135,6 @@ arXiv preprint.
 .</p>
     </div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">:::</span><span class="fu"><a href="random_mcar_mixed_data.html">random_mcar_mixed_data</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">100</span>, p <span class="op">=</span> <span class="fl">3</span>, n_fac <span class="op">=</span> <span class="fl">1</span>, ratio <span class="op">=</span> <span class="fl">0.2</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">imp_fun</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">:::</span><span class="va"><a href="median_mode_imputation.html">median_mode_imputation</a></span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">sc</span> <span class="op">&lt;-</span> <span class="fu">Iscores</span><span class="fu">:::</span><span class="fu">energy_Iscore_cat</span><span class="op">(</span>X <span class="op">=</span> <span class="va">X</span>, imputation_func <span class="op">=</span> <span class="va">imp_fun</span>, N <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">sc</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.7699801</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"dat")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      column_id weight     score n_columns_used</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> col1         1 0.1824 0.7096268              1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> col2         2 0.1659 0.7301908              1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> col4         4 0.1600 0.9355567              1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> col3         3 0.1539 0.7122622              1</span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
