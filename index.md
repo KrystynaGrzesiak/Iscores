@@ -19,8 +19,6 @@ For more details about the energy-I-Score check our vignettes:
 - [Energy-I-Score: First
   Steps](https://krystynagrzesiak.github.io/Iscores/articles/Example_IScore.html)
 
-------------------------------------------------------------------------
-
 ## Installation
 
 ### CRAN
@@ -38,6 +36,11 @@ install.packages("devtools")
 
 devtools::install_github("KrystynaGrzesiak/Iscores")
 ```
+
+## Issues
+
+If you encounter a bug, have a problem using Iscores, or would like to
+suggest an improvement, please open an issue.
 
 ------------------------------------------------------------------------
 
@@ -75,8 +78,6 @@ X <- Iscores:::random_mcar_data(100, 4)
 head(X)
 ```
 
-------------------------------------------------------------------------
-
 ## Energy-I-Score
 
 The
@@ -102,8 +103,6 @@ Detailed variable-level results are stored as an attribute:
 attr(sc, "dat")
 ```
 
-------------------------------------------------------------------------
-
 ## DR-I-Score
 
 The package also provides the density-ratio based DR-I-Score.
@@ -121,8 +120,6 @@ sc_dr <- DR_IScore(
 
 sc_dr
 ```
-
-------------------------------------------------------------------------
 
 ## Comparing imputation methods
 
@@ -174,19 +171,6 @@ compare_Iscores(
   silent = TRUE
 )
 ```
-
-------------------------------------------------------------------------
-
-## Documentation
-
-See the vignette for a complete introduction:
-
-``` r
-
-vignette("Example_IScore")
-```
-
-------------------------------------------------------------------------
 
 ## References
 
